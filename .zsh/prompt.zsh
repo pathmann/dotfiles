@@ -25,10 +25,10 @@ function title {
 
 function precmd {
   vcs_info
-  CURPATH=$(pwd | sed -e "s,^$HOME,~,")
-  CURPATH=${CURPATH:t}
-  title "%15<..<%~%<<" "%n@%m: ${CURPATH}"
-  #title "%15<..<%~%<<" "%n@%m: %~"
+  #CURPATH=$(pwd | sed -e "s,^$HOME,~,")
+  #CURPATH=${CURPATH:t}
+  #title "%15<..<%~%<<" "%n@%m: ${CURPATH}"
+  title "%15<..<%~%<<" "%n@%m: %~"
 }
 
 # This helps with screen especially
