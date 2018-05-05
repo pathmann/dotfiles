@@ -31,3 +31,7 @@ function mkcd {
     mkdir $1 && cd $1
   fi
 }
+
+function yaourt {
+  command yaourt "$@" | tee /tmp/yaourt.log
+}
