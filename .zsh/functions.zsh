@@ -1,5 +1,5 @@
 function extract()      # "extract Datei" extrahiert alle unten definierten Verzeichnisse
- # Credits: urukrama, Ubuntuforums.org   
+ # Credits: urukrama, Ubuntuforums.org
 {
  if [ -f $1 ] ; then
  case $1 in
@@ -30,4 +30,10 @@ function mkcd {
   else
     mkdir $1 && cd $1
   fi
+}
+
+function swapfiles()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
 }
