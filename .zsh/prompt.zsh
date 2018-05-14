@@ -1,5 +1,34 @@
 autoload -Uz promptinit
-promptinit; prompt gentoo
+promptinit;
+
+HOSTNAME=${hostname}
+if [[ "$HOSTNAME" == "heisenberg" ]]; then
+    prompt gentoo;
+else 
+prompt_gentoo_setup () {
+prompt_gentoo_prompt=${1:-'blue'}
+prompt_gentoo_user=${2:-'green'}
+prompt_gentoo_root=${3:-'red'}
+
+if [ "$USER" = 'root' ]
+then
+base_prompt="%B%F{$prompt_gentoo_root}%m%k "
+else
+base_prompt="%B%F{$prompt_gentoo_user}%n@%m%k "
+fi
+post_prompt="%b%f%k"
+
+#setopt noxtrace localoptions
+
+path_prompt="%B%F{$prompt_gentoo_prompt}%1~"
+PS1="$base_prompt$path_prompt %# $post_prompt"
+PS2="$base_prompt$path_prompt %_> $post_prompt"
+PS3="$base_prompt$path_prompt ?# $post_prompt"
+}
+
+prompt_gentoo_setup "$@"
+fi
+#prompt adam1
 
 autoload -Uz vcs_info
 
