@@ -39,5 +39,5 @@ function swapfiles()
 }
 
 function yaourt {
-  command yaourt "$@" | tee /tmp/yaourt.log
+  command yaourt "$@" | tee -a /tmp/yaourt.log
 }
