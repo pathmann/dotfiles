@@ -48,3 +48,4 @@ function swapfiles()
 function yaourt {
   command yaourt "$@" | tee -a /tmp/yaourt.log
 }
+

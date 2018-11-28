@@ -4,7 +4,7 @@ promptinit;
 HOSTNAME=${hostname}
 if [[ "$HOSTNAME" == "heisenberg" ]]; then
     prompt gentoo;
-else 
+else
 prompt_gentoo_setup () {
 prompt_gentoo_prompt=${1:-'blue'}
 prompt_gentoo_user=${2:-'green'}
