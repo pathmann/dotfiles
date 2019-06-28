@@ -49,3 +49,12 @@ function yaourt {
   command yaourt "$@" | tee -a /tmp/yaourt.log
 }
 
+function lastfile {
+    if [ ! -n "$1" ]; then
+        ONDIR="./"
+    else
+        ONDIR="$1"
+    fi
+
+    echo $(command find "$ONDIR" -maxdepth 1 -type f | sort | tail -n1)
+}
