@@ -1,2 +1,2 @@
 #!/bin/sh
-tmux new-session -A -s guake
+exec tmux new-session -A -s guake
