@@ -24,14 +24,11 @@ if [ $# -gt 3 ] ; then
   fi
 fi
 
-MAX=$COUNT
-
-while [ $COUNT -gt 0 ]
+for i in $(seq 1 $COUNT) ;
 do
   if [ "$PRINTNUMBERS" = true ] ; then
-    printf "$(($MAX-$COUNT +1 % $MAX)). "
+    printf "$i. "
   fi
   echo $(seq -w $OUTOF | sort -R | head -$NC | sort -n | fmt)
-  COUNT=$(($COUNT-1))
 done
 
