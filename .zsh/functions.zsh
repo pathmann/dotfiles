@@ -50,11 +50,16 @@ function yaourt {
 }
 
 function lastfile {
-    if [ ! -n "$1" ]; then
-        ONDIR="./"
-    else
-        ONDIR="$1"
+    local X=1
+    if [ -n "$1" ]; then
+        X=$(echo ""$X" - "$1"" | bc)
     fi
 
-    echo $(command find "$ONDIR" -maxdepth 1 -type f | sort | tail -n1)
+    if [ ! -n "$2" ]; then
+        ONDIR="./"
+    else
+        ONDIR="$2"
+    fi
+
+    echo $(command find "$ONDIR" -maxdepth 1 -type f | sort | tail -n$X | head -n 1)
 }
