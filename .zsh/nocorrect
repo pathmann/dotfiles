@@ -4,3 +4,4 @@ emerge
 sudo
 grep
 equery
+mkdir
