@@ -77,23 +77,15 @@ function findin {
         echo "No search phrase given"
         return
     fi
-    local PLINE=0
-    if [ -n "$3" ]; then
-        if [ "$3" = "-n" ]; then
-            PLINE=1
-        fi
-    fi
 
-    find $1 -type f -exec awk -v pattern="$2" -v pline="$PLINE" '
+    find $1 -type f -exec awk -v pattern="$2" '
         FNR == 1 {filename_printed = 0}
         $0 ~ pattern {
             if (!filename_printed) {
                 print "\033[31m"FILENAME"\033[0m"
                 filename_printed = 1
             }
-            if (pline==1) {
-                printf FNR": "
-            }
+            printf FNR": "
             print
         }' {} +
 }
