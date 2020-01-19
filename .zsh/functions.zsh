@@ -63,3 +63,37 @@ function lastfile {
 
     echo $(command find "$ONDIR" -maxdepth 1 -type f | sort | tail -n$X | head -n 1)
 }
+
+function findin {
+    if [ ! -n "$1" ]; then
+        echo "Enter a directory name"
+        return
+    fi
+    if [ ! -d $1 ]; then
+        echo "Directory does not exist"
+        return
+    fi
+    if [ ! -n "$2" ]; then
+        echo "No search phrase given"
+        return
+    fi
+    local PLINE=0
+    if [ -n "$3" ]; then
+        if [ "$3" = "-n" ]; then
+            PLINE=1
+        fi
+    fi
+
+    find $1 -type f -exec awk -v pattern="$2" -v pline="$PLINE" '
+        FNR == 1 {filename_printed = 0}
+        $0 ~ pattern {
+            if (!filename_printed) {
+                print "\033[31m"FILENAME"\033[0m"
+                filename_printed = 1
+            }
+            if (pline==1) {
+                printf FNR": "
+            }
+            print
+        }' {} +
+}
