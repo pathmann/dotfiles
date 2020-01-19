@@ -89,3 +89,28 @@ function findin {
             print
         }' {} +
 }
+
+function do_git {
+    local DIFFIT=false
+
+    if [[ "$*" == *diff* ]] then
+        if [[ ! "$*" == *-p* ]] then
+            DIFFIT=true
+        fi
+    fi
+    
+    local DIFFLEN=0
+    
+    if [ "$DIFFIT" = true ]; then
+        DIFF=$(command git --no-pager "$@" --color=always)
+        DIFFLEN=$(echo "$DIFF"|wc -l)
+
+        if [ $DIFFLEN -gt 15 ]; then
+            echo "$DIFF" | less -r
+        else
+            echo "$DIFF"
+        fi
+    else
+        command git "$@"
+    fi
+}
