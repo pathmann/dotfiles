@@ -117,3 +117,7 @@ function do_git {
         command git "$@"
     fi
 }
+
+function sugedit {
+  gedit "admin://$1"
+}
