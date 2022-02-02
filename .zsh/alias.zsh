@@ -12,6 +12,8 @@ alias "git=do_git"
 
 if [ -f /usr/bin/bat ]; then
   alias "cat=bat"
+elif [ -f /usr/bin/batcat ]; then
+  alias "cat=batcat"
 fi
 
 if [ -f /usr/bin/micro ]; then
