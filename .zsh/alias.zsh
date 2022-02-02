@@ -13,3 +13,7 @@ alias "git=do_git"
 if [ -f /usr/bin/bat ]; then
   alias "cat=bat"
 fi
+
+if [ -f /usr/bin/micro ]; then
+  alias "nano=micro"
+fi
