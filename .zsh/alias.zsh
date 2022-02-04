@@ -17,3 +17,5 @@ fi
 if [ -f /usr/bin/micro ]; then
   alias "nano=micro"
 fi
+
+alias "xclip=xclip -sel clip"
