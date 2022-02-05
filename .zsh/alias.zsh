@@ -22,4 +22,3 @@ fi
 
 alias "xclip=xclip -sel clip"
 
-alias 'sudo=nocorrect sudo '
