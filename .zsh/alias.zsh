@@ -21,3 +21,5 @@ if [ -f /usr/bin/micro ]; then
 fi
 
 alias "xclip=xclip -sel clip"
+
+alias 'sudo=nocorrect sudo '
