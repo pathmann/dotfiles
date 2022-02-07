@@ -22,3 +22,4 @@ fi
 
 alias "xclip=xclip -sel clip"
 
+alias "naut=nautilus .&"
