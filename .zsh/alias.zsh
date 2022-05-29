@@ -9,7 +9,10 @@ alias "dotfiles=git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 #git clone --separate-git-dir=$HOME/.dotfiles git@github.com:pathmann/dotfiles.git tmpdotfiles
 #rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
 #rm -r tmpdotfiles
-alias "git=do_git"
+
+if [ ! -f /usr/bin/delta ]; then
+  alias "git=do_git"
+fi
 
 if [ -f /usr/bin/bat ]; then
   alias "cat=bat"
