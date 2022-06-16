@@ -1,4 +1,3 @@
-alias "ls=ls --color=auto -h -al"
 alias "exa=exa -al"
 alias "gksudo=sudo gksudo gksudo"
 alias "gcalctool=LC_NUMERIC=de_DE.UTF-8 gnome-calculator"
@@ -12,6 +11,12 @@ alias "dotfiles=git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 if [ ! -f /usr/bin/delta ]; then
   alias "git=do_git"
+fi
+
+if [ -f /usr/bin/exa ]; then
+  alias "ls=exa -al"
+else
+  alias "ls=ls --color=auto -h -al"
 fi
 
 if [ -f /usr/bin/bat ]; then
