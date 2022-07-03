@@ -2,6 +2,7 @@ pathdirs=(
   ~/bin
   /usr/sbin
   /media/PROJECTS/osxcross/target/bin
+  ~/.local/bin
 )
 
 for dir in $pathdirs; do
