@@ -93,16 +93,19 @@ function findin {
 function do_git {
     local DIFFIT=false
 
-    if [[ "$*" == *diff* ]] then
-        if [[ ! "$*" == *-p* ]] then
-            DIFFIT=true
+    if [ -n "$1" ]; then
+        if [ "$1" = "diff" ]; then
+            if [[ ! "$*" == *-p* ]] then
+                DIFFIT=true
+                shift
+            fi
         fi
     fi
     
     local DIFFLEN=0
     
     if [ "$DIFFIT" = true ]; then
-        DIFF=$(command git --no-pager "$@" --color=always)
+        DIFF=$(command git --no-pager diff --color=always "$@")
         DIFFLEN=$(echo "$DIFF"|wc -l)
 
         if [ $DIFFLEN -gt 15 ]; then
@@ -113,4 +116,8 @@ function do_git {
     else
         command git "$@"
     fi
+}
+
+function sugedit {
+  gedit "admin://$1"
 }

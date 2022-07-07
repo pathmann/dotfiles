@@ -29,4 +29,8 @@ case "$TERM" in
                 bindkey "^[[7~" beginning-of-line       # Pos1
                 bindkey "^[[8~" end-of-line             # End
         ;;
+        tmux*)
+                bindkey "^[[1~" beginning-of-line       # Pos1
+                bindkey "^[[4~" end-of-line             # End
+        ;;
 esac
