@@ -3,6 +3,10 @@ fpath=("$HOME/.zsh/completion" $fpath)
 autoload -Uz compinit
 compinit
 
+if [ -f /usr/bin/zoxide ]; then
+  eval "$(zoxide init zsh)"
+fi
+
 if [ -f ~/.zsh/nocorrect ]; then
     while read -r COMMAND; do
         alias $COMMAND="nocorrect $COMMAND"
