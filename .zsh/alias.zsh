@@ -1,4 +1,5 @@
 alias "exa=exa -al"
+alias "rust-cling=evcxr"
 alias "gksudo=sudo gksudo gksudo"
 alias "gcalctool=LC_NUMERIC=de_DE.UTF-8 gnome-calculator"
 alias "yay=yay --save --makepkg $HOME/bin/customizepkg-makepkg.sh"
