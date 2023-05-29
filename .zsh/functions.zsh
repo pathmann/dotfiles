@@ -64,21 +64,32 @@ function lastfile {
     echo $(command find "$ONDIR" -maxdepth 1 -type f | sort | tail -n$X | head -n 1)
 }
 
+function join_by() {
+  local d=${1-} f=${2-}
+  if shift 2; then
+    printf %s "$f" "${@/#/$d}"
+  fi
+}
+
 function findin {
     if [ ! -n "$1" ]; then
         echo "Enter a directory name"
         return
     fi
-    if [ ! -d $1 ]; then
+    local indir=$1
+    shift
+    
+    if [ ! -d $indir ]; then
         echo "Directory does not exist"
         return
     fi
-    if [ ! -n "$2" ]; then
+    if [ ! -n "$1" ]; then
         echo "No search phrase given"
         return
     fi
+    local spattern=$(join_by "|" $@)
 
-    find $1 -type f -exec awk -v pattern="$2" '
+    find $indir -type f -exec awk -v pattern="$spattern" '
         FNR == 1 {filename_printed = 0}
         $0 ~ pattern {
             if (!filename_printed) {
