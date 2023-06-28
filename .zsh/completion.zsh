@@ -16,7 +16,9 @@ fi
 
 if [ -f ~/.zsh/nocorrect ]; then
     while read -r COMMAND; do
-        alias $COMMAND="nocorrect $COMMAND"
+        if [ command -v -- "$COMMAND" > /dev/null 2>&1 ]; then
+            alias $COMMAND="nocorrect $COMMAND"
+        fi
     done < ~/.zsh/nocorrect
 fi
 
