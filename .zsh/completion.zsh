@@ -4,6 +4,13 @@ autoload -Uz compinit
 compinit
 
 if [ -f /usr/bin/zoxide ]; then
+  if [ -f "$HOME/.zsh/zoxide_exclude_dirs" ]; then
+    exdirs="$HOME"
+    while read -r READDIR; do
+      exdirs=($exdirs:$READDIR)
+    done < $HOME/.zsh/zoxide_exclude_dirs
+    export _ZO_EXCLUDE_DIRS=$exdirs
+  fi
   eval "$(zoxide init zsh)"
 fi
 
