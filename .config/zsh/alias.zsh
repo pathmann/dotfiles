@@ -1,4 +1,4 @@
-alias "exa=exa -al"
+alias "exa=exa -al --icons"
 alias "rust-cling=evcxr"
 alias "gksudo=sudo gksudo gksudo"
 alias "gcalctool=LC_NUMERIC=de_DE.UTF-8 gnome-calculator"
