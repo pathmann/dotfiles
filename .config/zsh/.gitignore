@@ -1,3 +1,4 @@
 .zcomdump
 .zcompcache
 history
+local_env.zsh
