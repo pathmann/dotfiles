@@ -1,7 +1,10 @@
 #how many commands should be saved in history
 export HISTSIZE=2000
 #where should the history be stored
-export HISTFILE="$HOME/.zsh/history"
+if [ ! -d "$HOME/.cache/zsh" ]; then
+  mkdir $HOME/.cache/zsh
+fi 
+export HISTFILE="$HOME/.cache/zsh/history"
 #without this, the history won't be saved
 export SAVEHIST=$HISTSIZE
 #don't save duplicates in history
