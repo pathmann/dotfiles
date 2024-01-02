@@ -33,7 +33,7 @@ fi
 
 alias "xclip=xclip -sel clip"
 
-alias "naut=nautilus .&"
+#alias "naut=nautilus .&"
 
 if [ -f /usr/bin/zoxide ]; then
   alias "cd=z"

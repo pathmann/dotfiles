@@ -132,3 +132,11 @@ function do_git {
 function sugedit {
   gedit "admin://$1"
 }
+
+function naut {
+  if [ -n "$1" ]; then
+      nautilus $1 > /dev/null
+  else
+      nautilus . > /dev/null
+  fi
+}
