@@ -1,4 +1,4 @@
-alias "exa=exa -al --icons"
+
 alias "rust-cling=evcxr"
 alias "gksudo=sudo gksudo gksudo"
 alias "gcalctool=LC_NUMERIC=de_DE.UTF-8 gnome-calculator"
@@ -15,7 +15,13 @@ if [ ! -f /usr/bin/delta ]; then
   alias "git=do_git"
 fi
 
-if [ -f /usr/bin/exa ]; then
+
+if [ -f /usr/bin/eza ]; then
+  alias "exa=eza"
+  alias "eza=eza -al --icons"
+  alias "ls=eza -al"
+elif [ -f /usr/bin/exa ]; then
+  alias "exa=exa -al --icons"
   alias "ls=exa -al"
 else
   alias "ls=ls --color=auto -h -al"
