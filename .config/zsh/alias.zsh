@@ -45,6 +45,10 @@ if [ -f /usr/bin/zoxide ]; then
   alias "cd=z"
 fi
 
+if [[ ! -f /usr/bin/gedit && -f /usr/bin/leafpad ]]; then
+  alias "gedit=leafpad"
+fi
+
 # Reveal the real command executed, credits to https://dev.to/equiman/reveal-the-command-behind-an-alias-with-zsh-4d96
 local cmd_alias=""
 
