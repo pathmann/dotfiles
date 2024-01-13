@@ -135,8 +135,8 @@ function sugedit {
 
 function naut {
   if [ -n "$1" ]; then
-      nautilus $1 > /dev/null
+      nautilus $1 > /dev/null &
   else
-      nautilus . > /dev/null
+      nautilus . > /dev/null &
   fi
 }
