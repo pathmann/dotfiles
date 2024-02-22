@@ -1,0 +1,9 @@
+live_config_reload = true
+
+
+[colors.primary]
+foreground = "#d8d8d8"
+background = "#181818"
+
+[window]
+opacity = 0
