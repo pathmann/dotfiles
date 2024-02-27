@@ -3,7 +3,7 @@ if [ -n "$TMUX" ]; then
     export $(tmux show-environment | grep "^WAYLAND_DISPLAY")                                       
     export $(tmux show-environment | grep "^XDG_CURRENT_DESKTOP")
 	export $(tmux show-environment | grep "^HYPRLAND_INSTANCE_SIGNATURE")                                             
-                                       
+    export $(tmux show-environment | grep "^SSH_AUTH_SOCK")                                       
   }                                                                                                 
 else                                                                                                  
   function refresh { }                                                                              
