@@ -4,7 +4,7 @@ function handle {
   if [ -f "$HOME/bin/hyprland-eventhandler-openwindow.sh" ] && [ ${1:0:10} == "openwindow" ]; then
 	IFS=","
 	read -ra parsed_args <<< "${1:12}"
-	$("$HOME/bin/hyprland-eventhandler-openwindow.sh" "${parsed_args[@]}")
+	"$HOME/bin/hyprland-eventhandler-openwindow.sh" "${parsed_args[@]}"
   fi
 }
 
