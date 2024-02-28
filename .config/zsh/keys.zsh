@@ -19,7 +19,7 @@ case "$TERM" in
                 bindkey "^[[1~" beginning-of-line       # Pos1
                 bindkey "^[[4~" end-of-line             # End
         ;;
-        *xterm*|(dt|k)term)
+        *xterm*|(dt|k)term|alacritty)
                 bindkey "^[[H"  beginning-of-line       # Pos1
                 bindkey "^[[F"  end-of-line             # End
                 bindkey "^[[7~" beginning-of-line       # Pos1
