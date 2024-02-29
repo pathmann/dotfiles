@@ -8,4 +8,4 @@ function handle {
   fi
 }
 
-socat -t 1000 - UNIX-CONNECT:/tmp/hypr/$(echo $HYPRLAND_INSTANCE_SIGNATURE)/.socket2.sock | while read line; do handle "$line"; done
+socat -t 100 -U - UNIX-CONNECT:/tmp/hypr/$(echo $HYPRLAND_INSTANCE_SIGNATURE)/.socket2.sock | while read line; do handle "$line"; done
