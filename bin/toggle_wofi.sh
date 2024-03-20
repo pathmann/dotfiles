@@ -3,5 +3,5 @@ if pgrep -x "wofi" > /dev/null
 then
     pkill wofi
 else
-    wofi --show drun
+    wofi --insensitive --show drun
 fi
