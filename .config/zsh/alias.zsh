@@ -15,10 +15,6 @@ if [ ! -f /usr/bin/delta ]; then
   alias "git=do_git"
 fi
 
-if [ -f /usr/bin/sudo ]; then
-  alias "sudo=sudo -E"
-fi
-
 if [ -f /usr/bin/eza ]; then
   alias "exa=eza"
   alias "eza=eza -al --icons"
