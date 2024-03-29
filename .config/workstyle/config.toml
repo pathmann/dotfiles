@@ -30,10 +30,11 @@
 "transmission" = ""
 "videostream" = ""
 "mpv" = ""
-"music" = ""
+"music" = "🎶"
 "disk usage" = ""
+"steam" = ""
 
 [other]
 fallback_icon = ""
 deduplicate_icons = true
-separator = ""
+separator = " "
