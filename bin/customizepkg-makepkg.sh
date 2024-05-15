@@ -1,27 +1,35 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# makepkg wrapper that calls customizepkg first
+# credits to: shiraneyo (https://github.com/Jguer/yay/issues/336#issuecomment-813433797)
+set -euf -o pipefail +o history
 
-if [[ -e "/etc/customizepkg.d/$(basename $(pwd))" ]]; then
-    FOUND=0
+CURRENT_DIR_PATH="$(readlink -f "$(realpath -e "$(pwd)")")"
+GLOBAL_CONF_DIR_PATH='/etc/customizepkg.d'
+USER_CONF_DIR_PATH="${HOME}/.customizepkg"
 
-    for i in "$@" ; do
-        if [[ $i == "-cf" ]]; then
-            FOUND=$(($FOUND|1))
+pkgbuild_path="${CURRENT_DIR_PATH}/PKGBUILD"
+pkgbuild_copy_path="${pkgbuild_path}.original"
 
-            if [[ $FOUND == 3 ]]; then
-                break
-            fi
-        elif [[ $i == "--noconfirm" ]] ; then
-            FOUND=$(($FOUND|2))
+function is_readable_file {
+  local file_path="${1:-''}"
+  local ret=1
+  if [[ (-n "$file_path") && (-f "$file_path") && (-r "$file_path") ]];then
+    ret=0
+  fi
+  return $ret
+}
 
-            if [[ $FOUND == 3 ]]; then
-                break
-            fi
-        fi
-    done
-
-    if [[ $FOUND == 3 ]]; then
-        customizepkg --modify >&2
+if  is_readable_file "$pkgbuild_path" &&
+    ! is_readable_file "$pkgbuild_copy_path";then
+  source "$pkgbuild_path"
+  if [[ -n "${pkgname:-''}" ]];then
+    global_conf_path="${GLOBAL_CONF_DIR_PATH}/${pkgname}"
+    user_conf_path="${USER_CONF_DIR_PATH}/${pkgname}"
+    if  is_readable_file "$global_conf_path" ||
+        is_readable_file "$user_conf_path";then
+      customizepkg --modify
     fi
+  fi
 fi
 
-exec makepkg ${@}
+exec /usr/bin/makepkg ${@}
