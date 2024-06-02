@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "hyprlock",
+    "action" : "$HOME/bin/hyprlock_wrapper.sh",
     "text" : "Lock",
     "keybind" : "l"
 }
