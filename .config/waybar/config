@@ -8,7 +8,7 @@
     "ipc": true,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window", "clock"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "backlight", "keyboard-state", "battery", "tray"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "backlight", "keyboard-state", "battery", "idle_inhibitor", "tray"],
     // Modules configuration
      "hyprland/workspaces": {
     //     "disable-scroll": true,
@@ -51,7 +51,8 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+        "on-click-right": "hyprlock"
     },
     "tray": {
         // "icon-size": 21,
