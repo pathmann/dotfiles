@@ -29,7 +29,7 @@ if [ "${ALLDIR}/${NEWFILE}" != $(realpath "$1") ]; then
 fi
 
 if [ "$NEWEXT" != "png" ]; then
-    convert "$1" "$WALLPAPER_PATH"
+    magick "$1" "$WALLPAPER_PATH"
 else
     cp "$1" "$WALLPAPER_PATH"
 fi
