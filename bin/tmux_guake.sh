@@ -1,2 +1,7 @@
 #!/bin/sh
-exec tmux new-session -A -s guake
+SESSIONNAME="guake"
+if [ $# -eq 1 ] ; then
+  SESSIONNAME="$1"
+fi
+
+exec tmux new-session -A -s "$SESSIONNAME"
