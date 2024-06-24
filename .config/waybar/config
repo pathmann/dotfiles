@@ -7,8 +7,15 @@
     // Choose the order of the modules
     "ipc": true,
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["hyprland/window", "clock"],
+    "modules-center": ["hyprland/window", "clock", "custom/hostname"],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "backlight", "keyboard-state", "battery", "idle_inhibitor", "tray"],
+
+	"custom/hostname": {
+		"format": "{}",
+		"interval": "once",
+		"exec": "hostnamectl hostname",
+	},
+    
     // Modules configuration
      "hyprland/workspaces": {
     //     "disable-scroll": true,
