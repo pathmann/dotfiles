@@ -52,7 +52,7 @@ function yaourt {
 function lastfile {
     local X=1
     if [ -n "$1" ]; then
-        X=$(echo ""$X" - "$1"" | bc)
+        X=$1
     fi
 
     if [ ! -n "$2" ]; then
