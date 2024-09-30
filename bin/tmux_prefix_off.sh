@@ -13,4 +13,7 @@ if [ -n "$TMUX" ]; then
     fi
     
     tmux refresh-client -S
+else
+    echo "not in a tmux session"
+    exit 1
 fi
