@@ -6,8 +6,8 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "ipc": true,
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["hyprland/window", "clock", "custom/hostname"],
+    "modules-left": ["hyprland/workspaces", "sway/workspaces"],
+    "modules-center": ["hyprland/window","sway/window", "clock", "custom/hostname"],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "backlight", "keyboard-state", "battery", "idle_inhibitor", "tray"],
 
 	"custom/hostname": {
@@ -28,6 +28,17 @@
              "3": "",
     //         "4": "",
     //         "5": "",
+             "default": " ",
+             "urgent": "",
+             "focused": "",
+             "active": ""
+         }
+    },
+    "sway/workspaces": {
+         "format": "{name}: {icon}",
+         "format-icons": {
+             "2": ">_",
+             "3": "",
              "default": " ",
              "urgent": "",
              "focused": "",
