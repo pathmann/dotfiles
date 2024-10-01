@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "$HOME/bin/hyprlock_wrapper.sh",
+    "action" : "$HOME/bin/lock_wrapper.sh",
     "text" : "Lock",
     "keybind" : "l"
 }
@@ -12,7 +12,7 @@
 }
 {
     "label" : "logout",
-    "action" : "killall -9 Hyprland sleep 2",
+    "action" : "killall -9 Hyprland sleep 2 || killall -9 sway sleep 2",
     "text" : "Exit",
     "keybind" : "e"
 }
