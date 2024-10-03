@@ -24,7 +24,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "c",
   callback = function()
-    vim.keymap.set("n", "<F4>", swicthHeaderSource, { noremap = true, silent = true })
+    vim.keymap.set("n", "<F4>", switchHeaderSource, { noremap = true, silent = true })
   end,
 })
 
