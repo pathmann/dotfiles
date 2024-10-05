@@ -89,22 +89,22 @@ return {
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
-            preselect = cmp.PreselectMode.Item,
-		    completion = {
-			  completeopt = 'menu,menuone,noinsert',
-              autocomplete = false, -- disable automatically popping up when typing
-			},
-            mapping = cmp.mapping.preset.insert({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<cr>'] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
-            }),
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-            }, {
-                { name = 'buffer' },
-            })
+          preselect = cmp.PreselectMode.Item,
+          completion = {
+            completeopt = 'menu,menuone,noinsert',
+            autocomplete = false, -- disable automatically popping up when typing
+          },
+          mapping = cmp.mapping.preset.insert({
+            ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+            ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+            ['<cr>'] = cmp.mapping.confirm({ select = true }),
+            ["<C-Space>"] = cmp.mapping.complete(),
+          }),
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+          }, {
+            { name = 'buffer' },
+          })
         })
 
         vim.diagnostic.config({
