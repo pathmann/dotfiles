@@ -8,6 +8,7 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
+        "ray-x/lsp_signature.nvim",
     },
     event = { "BufReadPost", "BufNewFile" },
 
@@ -34,6 +35,9 @@ return {
           vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
           vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
           --vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+
+          local lsp_sig = require("lsp_signature")
+          lsp_sig.on_attach({}, bufnr)
         end
 
 
@@ -70,7 +74,7 @@ return {
                         }
                     }
                 end,
-				[[--["clangd"] = function()
+				--[[["clangd"] = function()
 				  local lspconfig = require("lspconfig")
 				  lspconfig.clangd.setup {
 					on_attach = function(client, bufnr)
