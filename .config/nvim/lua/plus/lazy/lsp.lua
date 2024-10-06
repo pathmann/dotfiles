@@ -21,6 +21,7 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities()
         )
+        capabilities.textDocument.completion.completionItem.snippetSupport = false
 
         local lsp_attach = function(client, bufnr)
           local opts = {buffer = bufnr}
