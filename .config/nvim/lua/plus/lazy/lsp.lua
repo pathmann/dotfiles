@@ -38,6 +38,10 @@ return {
           --vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
           local lsp_sig = require("lsp_signature")
+          vim.keymap.set("i", "<C-g>", function()
+            lsp_sig.toggle_float_win()
+          end,
+          { silent = true, noremap = true, desc = 'toggle signature' })
           lsp_sig.on_attach({}, bufnr)
         end
 
