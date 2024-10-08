@@ -58,6 +58,7 @@ function OpenNamedTermAndRun()
     if ok and is_run_term == 1 then
       vim.api.nvim_set_current_win(win)     -- Switch to that window
       RunFunctionOrString(vim.b.terminal_job_id, projcmd)
+      vim.cmd("norm G")
       return
     end
   end
