@@ -67,5 +67,5 @@ vim.keymap.set("n", "<C-r>", function()
 end
 )
 
-vim.keymap.set('c', '<Down>', '<C-n>', { noremap = true, silent = true })
-vim.keymap.set('c', '<Up>', '<C-p>', { noremap = true, silent = true })
+vim.keymap.set('c', '<C-Down>', '<C-n>', { noremap = true, silent = true })
+vim.keymap.set('c', '<C-Up>', '<C-p>', { noremap = true, silent = true })
