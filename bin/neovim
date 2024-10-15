@@ -1,0 +1,44 @@
+#!/bin/bash
+
+target_dir=""
+args=()
+
+# set target_dir is a valid directory or file is set
+set_target_dir() {
+    local arg="$1"
+    if [ -d "$arg" ]; then
+        target_dir="$arg"
+    elif [ -f "$arg" ]; then
+        target_dir=$(dirname "$arg")
+    fi
+}
+
+# adjust the argument path by trimming target_dir from it (if relative)
+process_path() {
+    local path="$1"
+    if [[ "$path" != /* ]]; then
+        echo "$(realpath --relative-to="$target_dir" "$path")"
+    else
+        echo "$path"
+    fi
+}
+
+for arg in "$@"; do
+    if [[ "$arg" == -* ]] || [[ "$arg" == +* ]]; then
+        args+=("$arg")
+        continue
+    fi
+
+    if [ -z "$target_dir" ]; then
+        set_target_dir "$arg"
+    fi
+
+    args+=("$(process_path "$arg")")
+done
+
+if [ -n "$target_dir" ]; then
+    cd "$target_dir" || exit 1
+fi
+
+nvim "${args[@]}"
+
