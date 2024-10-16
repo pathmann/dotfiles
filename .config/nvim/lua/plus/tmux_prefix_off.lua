@@ -8,4 +8,13 @@ if vim.fn.has('unix') == 1 and vim.fn.getenv('TMUX') ~= nil then
       end
     end,
   })
+  vim.api.nvim_create_autocmd({ 'VimSuspend', 'VimLeave' }, {
+    callback = function()
+      local tmux_pref_on_path = "/home/thomas/bin/tmux_prefix_on.sh"
+
+      if vim.fn.filereadable(tmux_pref_on_path) ~= 0 then
+        vim.fn.system(tmux_pref_on_path)
+      end
+    end,
+  })
 end
