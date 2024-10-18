@@ -12,6 +12,8 @@ return {
       },
       exclude = {
         "text",
+        "jinja",
+        "text.jinja",
       }
     }
 
