@@ -19,6 +19,6 @@ return {
 
     vim.keymap.set("n", "<leader>pp", function()
       require("telescope").extensions.yank_history.yank_history()
-    end)
+    end, { desc = "Find in history" })
   end
 }

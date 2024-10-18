@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "To netrw" })
 
 vim.keymap.set("n", "<C-t>", function()
   local cddir = vim.fn.getcwd()
@@ -13,13 +13,12 @@ vim.keymap.set("n", "<C-t>", function()
   vim.cmd("tabnew")
   vim.cmd("cd " .. cddir)
   vim.cmd("Ex")
-end)
+end, { desc = "New tab" })
 
-vim.keymap.set("n", "<C-w>", ":q<CR>")
-vim.keymap.set("n", "<leader>sh", ":split<CR>")
-vim.keymap.set("n", "<leader>sv", ":vsplit<CR>")
+vim.keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close (tab)" })
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
 vim.keymap.set("i", 'jj', '<Esc>', { noremap = true, silent = true })
--- leave terminal mode
 vim.keymap.set("t", 'jj', '<C-\\><C-n>', { noremap = true, silent = true })
 vim.keymap.set("t", '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
@@ -58,7 +57,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 
-vim.keymap.set("n","<Tab", ">>")
+vim.keymap.set("n","<Tab>", ">>")
 vim.keymap.set("n", "<S-Tab>", "<<")
 vim.keymap.set("i", "<S-Tab>", "<C-\\><C-N><<<C-\\><C-N>^i")
 

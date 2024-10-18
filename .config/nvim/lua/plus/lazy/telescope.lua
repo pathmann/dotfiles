@@ -28,7 +28,7 @@ return {
           return true
         end
       })
-    end)
+    end, { desc = "Find files" })
 
     --vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 
@@ -50,6 +50,6 @@ return {
           return true
         end
       })
-    end)
+    end, { desc = "Project find" })
   end
 }

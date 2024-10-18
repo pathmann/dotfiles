@@ -48,7 +48,7 @@ return {
       callback = function()
         vim.keymap.set("n", "<leader>md", function()
           createClassDeclaration()
-        end, { noremap = true, silent = true })
+        end, { noremap = true, silent = true, desc = "Make definition" })
       end,
     })
 
