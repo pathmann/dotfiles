@@ -9,6 +9,9 @@ return {
         "table",
         "if_statement",
         "function_definition",
+      },
+      exclude = {
+        "text",
       }
     }
 
