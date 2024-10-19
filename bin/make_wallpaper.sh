@@ -5,12 +5,42 @@ WALLPAPER_PATH="$HOME/wallpapers/wallpaper.png"
 BLURRED_PATH="$HOME/wallpapers/wallpaper-blurred.png"
 SQUARED_PATH="$HOME/wallpapers/wallpaper-squared.png"
 
-if [ $# -ne 1 ] ; then
-  echo "Usage: $0 <new-wallpaper>"
+SQGRAV="Center"
+
+if [ $# -le 0 ] ; then
+  echo "Usage: $0 [--squared-gravity <magick-gravity>] <new-wallpaper>"
   exit 1
 fi
 
-NEWFILE=$(basename $1)
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --squared-gravity)
+      shift
+
+      if [ $# -eq 0 ]; then
+        echo "missing gravity parameter, see magick -gravity help"
+        exit 1
+      fi
+      SQGRAV=$1
+      shift
+      ;;
+    -*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      FNAME=$1
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$FNAME" ]; then
+  echo "No file given"
+  exit 1
+fi
+
+NEWFILE=$(basename "$FNAME")
 NEWEXT=$(echo "${NEWFILE##*.}" | tr '[:upper:]' '[:lower:]')
 NEWFILEBASE="${NEWFILE%.*}"
 
@@ -19,23 +49,23 @@ if [ ! -d  "$ALLDIR" ]; then
 fi
 
 
-if [ "${ALLDIR}/${NEWFILE}" != $(realpath "$1") ]; then
+if [ "${ALLDIR}/${NEWFILE}" != $(realpath "$FNAME") ]; then
     if [ -f "${ALLDIR}/${NEWFILE}" ]; then
         CURDATE=$(date '%Y-%m-%d')
-        cmp --silent "${ALLDIR}/${NEWFILE}" "$1" || cp "$1" "${ALLDIR}/${NEWFILEBASE}_${CURDATE}.${NEWEXT}"
+        cmp --silent "${ALLDIR}/${NEWFILE}" "$FNAME" || cp "$FNAME" "${ALLDIR}/${NEWFILEBASE}_${CURDATE}.${NEWEXT}"
     else
-        cp "$1" "${ALLDIR}"
+        cp "$FNAME" "${ALLDIR}"
     fi
 fi
 
 if [ "$NEWEXT" != "png" ]; then
-    magick "$1" "$WALLPAPER_PATH"
+    magick "$FNAME" "$WALLPAPER_PATH"
 else
-    cp "$1" "$WALLPAPER_PATH"
+    cp "$FNAME" "$WALLPAPER_PATH"
 fi
 
 magick "$WALLPAPER_PATH" -resize 75% "$BLURRED_PATH"
 magick "$BLURRED_PATH" -blur 50x30 "$BLURRED_PATH"
-magick "$WALLPAPER_PATH" -gravity Center -extent 1:1 "$SQUARED_PATH"
+magick "$WALLPAPER_PATH" -gravity $SQGRAV -extent 1:1 "$SQUARED_PATH"
 
 
