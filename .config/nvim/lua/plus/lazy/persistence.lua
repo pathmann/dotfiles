@@ -1,7 +1,16 @@
 return {
   "folke/persistence.nvim",
 
-  opts = {
-    need = 0,
-  },
+  config = function()
+    local per = require("persistence")
+    per.setup({})
+    per.stop()
+
+    vim.keymap.set("n", "<leader>ql", function()
+      per.select()
+    end, { desc = "Select/Load session" })
+    vim.keymap.set("n", "<leader>qs", function()
+      per.save()
+    end, { desc = "Store session" })
+  end,
 }
