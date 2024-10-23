@@ -68,3 +68,7 @@ end
 
 vim.keymap.set('c', '<C-Down>', '<C-n>', { noremap = true, silent = true })
 vim.keymap.set('c', '<C-Up>', '<C-p>', { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>qs", function()
+  require("persistence").select()
+end, { desc = "Select session" })
