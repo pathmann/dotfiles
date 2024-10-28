@@ -51,5 +51,12 @@ return {
         end
       })
     end, { desc = "Project find" })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "TelescopePreviewerLoaded",
+      callback = function(args)
+        vim.wo.wrap = true
+      end,
+    })
   end
 }
