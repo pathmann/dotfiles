@@ -13,5 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = "plus.lazy",
-    change_detection = { notify = false }
+    change_detection = { notify = false },
+    dev = {
+      path = "~/Projects",
+      fallback = false,
+    }
 })
