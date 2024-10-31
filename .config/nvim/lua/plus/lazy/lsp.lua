@@ -45,6 +45,19 @@ return {
           lsp_sig.on_attach({}, bufnr)
         end
 
+        local harper_lsp_attach = function(client, bufnr)
+          local disabled_fts = { "lua", "cpp" }
+          local curft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+
+          for _, ft in ipairs(disabled_fts) do
+            if ft == curft then
+              client.stop()
+              return
+            end
+          end
+
+          lsp_attach(client, bufnr)
+        end
 
         require("mason").setup()
         require("mason-lspconfig").setup({
@@ -67,6 +80,7 @@ return {
 
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
+
                     lspconfig.lua_ls.setup {
                         capabilities = capabilities,
                         settings = {
@@ -76,8 +90,16 @@ return {
                                     globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
                                 }
                             }
-                        }
+                        },
+                        on_attach = lsp_attach,
                     }
+                end,
+                ["harper_ls"] = function()
+                  local lspconfig = require("lspconfig")
+                  lspconfig.harper_ls.setup {
+                    capabilities = capabilities,
+                    on_attach = harper_lsp_attach,
+                  }
                 end,
 				--[[["clangd"] = function()
 				  local lspconfig = require("lspconfig")
