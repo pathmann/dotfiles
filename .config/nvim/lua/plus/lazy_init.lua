@@ -1,4 +1,9 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local devpath = "~/Projects"
+if vim.fn.hostname() == "heisenberg" then
+  devpath = "/media/PROJECTS/Active/neovim"
+end
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -15,7 +20,7 @@ require("lazy").setup({
     spec = "plus.lazy",
     change_detection = { notify = false },
     dev = {
-      path = "~/Projects",
+      path = devpath,
       fallback = false,
     }
 })
