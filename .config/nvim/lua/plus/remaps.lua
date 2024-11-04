@@ -69,3 +69,15 @@ end
 vim.keymap.set('c', '<C-Down>', '<C-n>', { noremap = true, silent = true })
 vim.keymap.set('c', '<C-Up>', '<C-p>', { noremap = true, silent = true })
 
+local function smart_home()
+  local col = vim.fn.col('.')
+  if col == 1 then
+    vim.cmd('normal! ^')
+  else
+    vim.cmd('normal! 0')
+  end
+end
+
+vim.keymap.set("n", "<Home>", smart_home, { remap = true })
+vim.keymap.set("i", "<Home>", smart_home, { remap = true })
+
