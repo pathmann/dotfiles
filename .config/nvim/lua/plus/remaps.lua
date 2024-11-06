@@ -15,6 +15,12 @@ vim.keymap.set("n", "<C-t>", function()
   vim.cmd("Ex")
 end, { desc = "New tab" })
 
+vim.keymap.set("n", "<leader>ct", function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  vim.cmd("tabnew")
+  vim.api.nvim_set_current_buf(current_buf)
+end, { desc = "Clone tab" })
+
 vim.keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close (tab)" })
 vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
 vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
