@@ -44,6 +44,8 @@ return {
             actions.close(prompt_bufnr)
             if selection ~= nil then
               vim.cmd('tabnew ' .. selection.path)  -- Open in a new tab
+              vim.cmd(':' .. selection.lnum)
+              vim.cmd('norm zz')
             end
           end)
 
