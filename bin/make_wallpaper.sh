@@ -51,7 +51,7 @@ fi
 
 if [ "${ALLDIR}/${NEWFILE}" != $(realpath "$FNAME") ]; then
     if [ -f "${ALLDIR}/${NEWFILE}" ]; then
-        CURDATE=$(date '%Y-%m-%d')
+        CURDATE=$(date '+%Y-%m-%d')
         cmp --silent "${ALLDIR}/${NEWFILE}" "$FNAME" || cp "$FNAME" "${ALLDIR}/${NEWFILEBASE}_${CURDATE}.${NEWEXT}"
     else
         cp "$FNAME" "${ALLDIR}"
