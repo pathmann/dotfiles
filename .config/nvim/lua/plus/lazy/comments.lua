@@ -6,7 +6,10 @@ return {
       line = "<leader>//",
       block = "<leader>/*",
     },
-    opleader = nil,
+    opleader = {
+      line = "//",
+      block = "/*",
+    },
     extra = nil,
     mappings = {
       extra = false,
