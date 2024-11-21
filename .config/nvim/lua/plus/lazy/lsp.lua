@@ -59,6 +59,12 @@ return {
           lsp_attach(client, bufnr)
         end
 
+        local rust_lsp_attach = function(client, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr })
+
+          lsp_attach(client, bufnr)
+        end
+
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -99,6 +105,13 @@ return {
                   lspconfig.harper_ls.setup {
                     capabilities = capabilities,
                     on_attach = harper_lsp_attach,
+                  }
+                end,
+                ["rust_analyzer"] = function()
+                  local lspconfig = require("lspconfig")
+                  lspconfig.rust_analyzer.setup {
+                    capabilities = capabilities,
+                    on_attach = rust_lsp_attach,
                   }
                 end,
 				--[[["clangd"] = function()
