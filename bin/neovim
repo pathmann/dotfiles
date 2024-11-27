@@ -16,10 +16,14 @@ set_target_dir() {
 # adjust the argument path by trimming target_dir from it (if relative)
 process_path() {
     local path="$1"
-    if [[ "$path" != /* ]]; then
-        echo "$(realpath --relative-to="$target_dir" "$path")"
-    else
+    if [ -e "$path" ]; then
+      if [[ "$path" != /* ]]; then
+        realpath --relative-to="$target_dir" "$path"
+      else
         echo "$path"
+      fi
+    else
+      echo "$path"
     fi
 }
 
