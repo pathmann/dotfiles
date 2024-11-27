@@ -11,8 +11,7 @@ vim.keymap.set("n", "<C-t>", function()
   end
 
   vim.cmd("tabnew")
-  vim.cmd("cd " .. cddir)
-  vim.cmd("Ex")
+  vim.cmd("silent Ex " .. cddir)
 end, { desc = "New tab" })
 
 vim.keymap.set("n", "<leader>ct", function()
