@@ -1,5 +1,5 @@
 #!/bin/sh
-SESSIONNAME="guake"
+SESSIONNAME="Desktop"
 if [ $# -eq 1 ] ; then
   SESSIONNAME="$1"
 fi
