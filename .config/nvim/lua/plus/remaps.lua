@@ -1,5 +1,11 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "To netrw" })
+vim.keymap.set("n", "<leader>pv", function()
+  local buf_ft = vim.bo.filetype
+  if buf_ft == "oil" then
+    vim.cmd("silent! bwipeout") -- Close the oil buffer
+  end
+  vim.cmd("Ex")
+end, { desc = "To netrw" })
 
 vim.keymap.set("n", "<C-t>", function()
   local cddir = vim.fn.getcwd()
