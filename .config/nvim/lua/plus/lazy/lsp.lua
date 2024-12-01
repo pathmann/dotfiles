@@ -74,6 +74,7 @@ return {
                 "harper_ls",
                 "bashls",
                 "pylsp",
+                "slint_lsp",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
