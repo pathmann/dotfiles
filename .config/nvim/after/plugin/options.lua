@@ -12,3 +12,5 @@ vim.opt.number = true         -- Absolute line numbers
 vim.opt.relativenumber = true -- Relative line numbers
 
 vim.opt.clipboard = "unnamed"
+
+vim.opt.showtabline = 2 -- always show the top tab line
