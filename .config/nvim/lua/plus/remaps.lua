@@ -75,11 +75,6 @@ vim.keymap.set("i", "<S-Tab>", "<C-\\><C-N><<<C-\\><C-N>^i")
 vim.keymap.set("n", "<leader>o", "o<ESC>", { desc = "Insert newline" })
 vim.keymap.set("n", "<leader>O", "O<ESC>", { desc = "Insert newline previous line" })
 
---[[vim.keymap.set("n", "<C-r>", function() 
-  OpenNamedTermAndRun()
-end
-)]]
-
 vim.keymap.set('c', '<C-Down>', '<C-n>', { noremap = true, silent = true })
 vim.keymap.set('c', '<C-Up>', '<C-p>', { noremap = true, silent = true })
 
