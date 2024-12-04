@@ -1,0 +1,53 @@
+version = "1.1.15"
+
+[icons]
+DEFAULT = ""
+"(?i)chromium" = ""
+"geany" = ""
+"(?i)alacritty" = ""
+"(?i)qtcreator" = ""
+"code" = ""
+"(?i)texworks" = "✏️"
+"(?i)thunderbird" = ""
+"github" = ""
+"rust" = ""
+"google" = ""
+"private browsing" = ""
+"firefox" = ""
+"chrome" = ""
+"(?i)nautilus" = ""
+"libreoffice calc" = ""
+"libreoffice writer" = ""
+"libreoffice" = ""
+"nvim" = ""
+"gthumb" = ""
+"menu" = ""
+"calculator" = ""
+"transmission" = ""
+"videostream" = ""
+"mpv" = ""
+"music" = "🎶"
+"disk usage" = ""
+"(?i)steam" = ""
+
+
+[exclude]
+"(?i)fcitx" = ".*"
+aProgram = "^$"
+"" = "^$"
+"(?i)TestApp" = ""
+"[Ss]team" = "^(Friends List.*)?$"
+
+[format]
+max_clients = 1
+dedup = true
+dedup_inactive_fullscreen = true
+delim = ""
+workspace = "{id}:{delim}{clients}"
+workspace_empty = "{id}"
+client = "{icon}"
+client_fullscreen = "[{icon}]"
+client_active = "{icon}"
+client_dup = "{icon}"
+client_dup_active = "{icon}"
+client_dup_fullscreen = "[{icon}]{delim}{icon}{counter_unfocused_sup}"
