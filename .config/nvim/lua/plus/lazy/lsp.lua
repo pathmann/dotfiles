@@ -66,6 +66,9 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
+            automatic_installation = {
+              exclude = { "rust_analyzer", }
+            },
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
@@ -78,10 +81,14 @@ return {
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities,
-                        on_attach = lsp_attach,
-                    }
+                  if server_name == "rust_analyzer" then
+                    return
+                  end
+
+                  require("lspconfig")[server_name].setup {
+                    capabilities = capabilities,
+                    on_attach = lsp_attach,
+                  }
                 end,
 
                 ["lua_ls"] = function()
@@ -107,13 +114,13 @@ return {
                     on_attach = harper_lsp_attach,
                   }
                 end,
-                ["rust_analyzer"] = function()
+                --[[ ["rust_analyzer"] = function()
                   local lspconfig = require("lspconfig")
                   lspconfig.rust_analyzer.setup {
                     capabilities = capabilities,
                     on_attach = rust_lsp_attach,
                   }
-                end,
+                end, ]]
 				--[[["clangd"] = function()
 				  local lspconfig = require("lspconfig")
 				  lspconfig.clangd.setup {
