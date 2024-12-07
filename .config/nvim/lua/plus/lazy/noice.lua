@@ -24,4 +24,8 @@ return {
       lsp_doc_border = false, -- add a border to hover docs and signature help
     },
   },
+
+  keys = {
+    { "<leader>un", "<cmd>Noice dismiss<CR>", desc = "Dismiss all notifications" }
+  }
 }
