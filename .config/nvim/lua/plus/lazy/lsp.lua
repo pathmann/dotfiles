@@ -45,7 +45,7 @@ return {
         end
 
         local harper_lsp_attach = function(client, bufnr)
-          local disabled_fts = { "lua", "cpp" }
+          local disabled_fts = { "lua", "cpp", "rust" }
           local curft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
           for _, ft in ipairs(disabled_fts) do
