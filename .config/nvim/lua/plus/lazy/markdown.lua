@@ -1,15 +1,16 @@
 return {
-  "iamcco/markdown-preview.nvim",
+  "OXY2DEV/markview.nvim",
 
-  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-
-  ft = { "markdown" },
-
-  build = function()
-    vim.fn["mkdp#util#install"]()
-  end,
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-tree/nvim-web-devicons"
+  },
 
   config = function()
-    vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Markdown preview" })
+    local mv = require("markview")
+    mv.setup({
+      initial_state = false,
+    })
+    vim.keymap.set("n", "<leader>mp", "<cmd>Markview splitToggle<cr>", { desc = "Toggle markdown preview" })
   end,
 }
