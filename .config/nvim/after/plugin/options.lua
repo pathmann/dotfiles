@@ -11,6 +11,6 @@ vim.opt.autoindent = true  -- Copy indent from the current line when starting a 
 vim.opt.number = true         -- Absolute line numbers
 vim.opt.relativenumber = true -- Relative line numbers
 
-vim.opt.clipboard = "unnamed"
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.showtabline = 2 -- always show the top tab line
