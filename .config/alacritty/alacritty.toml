@@ -1,4 +1,6 @@
-
+[font]
+size=14.0
+normal = { family = "Hack NerdFont", style = "Regular" }
 
 [colors.primary]
 foreground = "#d8d8d8"
