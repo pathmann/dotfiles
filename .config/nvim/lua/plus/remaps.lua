@@ -80,10 +80,11 @@ vim.keymap.set('c', '<C-Up>', '<C-p>', { noremap = true, silent = true })
 
 local function smart_home()
   local col = vim.fn.col('.')
-  if col == 1 then
-    vim.cmd('normal! ^')
-  else
+  local first_non_whitespace = vim.fn.match(vim.fn.getline('.'), '\\S') + 1
+  if col == first_non_whitespace then
     vim.cmd('normal! 0')
+  else
+    vim.cmd('normal! ^')
   end
 end
 
