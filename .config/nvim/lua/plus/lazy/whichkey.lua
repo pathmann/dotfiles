@@ -3,9 +3,11 @@ return {
 
   event = "VeryLazy",
 
-  opts = {
+  config = function()
+    require("which-key").setup({})
 
-  },
+    require("which-key.plugins.registers").registers = '*+0123456789"-:.%/#=_abcdefghijklmnopqrstuvwxyz'
+  end,
 
   keys = {
     {
