@@ -10,7 +10,15 @@ return {
 
   config = function()
     local plug = require("dap-project-configuration")
-    plug.setup({})
+    plug.setup({
+      ignore_win_to_close = function(wid)
+        if vim.wo[wid].winhl == 'Normal:Beacon' then
+          return true
+        end
+
+        return false
+      end,
+    })
 
     vim.keymap.set("n", "<C-r>", "<cmd>ProjectDapRun<CR>", { desc = "Run/Continue DAP" })
     vim.keymap.set("n", "<leader>sr", "<cmd>ProjectDapSelect<CR>", { desc = "Select DAP config" })
