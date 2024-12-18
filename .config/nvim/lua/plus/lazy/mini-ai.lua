@@ -13,6 +13,8 @@ return {
     mini.setup({
       custom_textobjects = {
         F = spec_treesitter({ a = '@function.outer', i = '@function.inner' }),
+        P = spec_treesitter({ a = '@function.outer', i = '@function.inner' }),
+        c = spec_treesitter({ a = '@comment.outer', i = '@comment.inner' }),
       }
     })
   end,
