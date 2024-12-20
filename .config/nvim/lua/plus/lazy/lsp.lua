@@ -133,6 +133,25 @@ return {
             }
         })
 
+        local lspcfg = require("lspconfig.configs")
+        local lspconfig = require("lspconfig")
+        if not lspcfg.qmlls then
+          lspcfg.qmlls =  {
+            default_config = {
+              cmd = {"qmlls6"},
+              capabilities = capabilities,
+              on_attach = lsp_attach,
+              single_file_support = true,
+              filetypes = {"qml"},
+              root_dir = function(fname)
+                lspconfig.util.find_git_ancestor(fname)
+              end,
+            }
+          }
+        end
+
+        lspconfig.qmlls.setup({})
+
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
