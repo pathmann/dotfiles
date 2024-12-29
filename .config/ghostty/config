@@ -1,0 +1,11 @@
+window-decoration = false
+
+font-family = Hack NerdFont
+
+foreground = "#d8d8d8"
+background = "#181818"
+background-opacity = 0.9
+
+resize-overlay = never
+
+confirm-close-surface = false
