@@ -70,7 +70,7 @@ vim.api.nvim_create_user_command("TerminalToggle", function(opts)
 end, { nargs = "?" });
 
 for i=1,5 do
-  vim.keymap.set({"n", "t"}, "<leader>t" .. i, function()
+  vim.keymap.set("n", "<leader>t" .. i, function()
     toggle_terminal(i)
   end, { desc = "Toggle Terminal " .. i })
 end
