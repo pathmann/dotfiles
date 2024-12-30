@@ -54,8 +54,12 @@ local function toggle_terminal(name)
   end
 
   terminal_state[name] = create_floating_terminal({ buf = buf })
-  if vim.bo[terminal_state[name].buf].buftype ~= "terminal" then
+  buf = terminal_state[name].buf
+  if vim.bo[buf].buftype ~= "terminal" then
     vim.cmd("terminal")
+    vim.keymap.set("t", "<C-w>", function()
+      toggle_terminal(name)
+    end, { buffer= buf, desc = "Close terminal" })
   end
 end
 
