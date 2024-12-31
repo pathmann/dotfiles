@@ -25,6 +25,7 @@ local function reload_current_plugin()
 
   if plugin_name ~= nil then
     reload_plugin_by_name(plugin_name)
+    print("plugin " .. plugin_name .. " reloaded")
   end
 end
 
