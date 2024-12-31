@@ -63,6 +63,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "netrw",
   callback = function()
     vim.keymap.set("n", '<C-l>', go_right_or_tab, { remap = true, buffer = true })
+    vim.keymap.set("n", "<BS>", "u", { remap = true, buffer = true })
   end,
 })
 vim.keymap.set("n", "<C-j>", "<C-w>j")
