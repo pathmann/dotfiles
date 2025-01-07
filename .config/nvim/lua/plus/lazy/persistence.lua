@@ -7,7 +7,7 @@ return {
     per.stop()
 
     vim.keymap.set("n", "<leader>ql", function()
-      per.select()
+      per.load()
     end, { desc = "Select/Load session" })
     vim.keymap.set("n", "<leader>qs", function()
       per.save()
