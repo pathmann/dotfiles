@@ -14,3 +14,5 @@ vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.showtabline = 2 -- always show the top tab line
+vim.g.netrw_sort_options = "i"
+vim.g.netrw_sort_sequence = "[/]$"
