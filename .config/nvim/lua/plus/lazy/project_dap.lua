@@ -23,6 +23,10 @@ return {
     vim.keymap.set("n", "<C-r>", "<cmd>ProjectDapRun<CR>", { desc = "Run/Continue DAP" })
     vim.keymap.set("n", "<leader>sr", "<cmd>ProjectDapSelect<CR>", { desc = "Select DAP config" })
     vim.keymap.set("n", "<leader>tr", "<cmd>ProjectDapToggleDap<CR>", { desc = "Toggle Run Dap" })
+    vim.keymap.set("n", "<leader>ro", function()
+      vim.cmd("tabnew")
+      vim.cmd("e " .. vim.fn.getcwd() .. "/.nvim-dap-project-configuration.lua")
+    end, { desc = "Open dap config" })
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "netrw",
