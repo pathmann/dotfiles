@@ -20,5 +20,6 @@ return {
 
     local ft = require('Comment.ft')
     ft.set("qml", {"//%s", "/*%s*/"})
+    ft.set("python", {"# %s", '"""%s"""'})
   end,
 }
