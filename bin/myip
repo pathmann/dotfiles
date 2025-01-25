@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if ip=$(curl -s https://ipinfo.io/ip); then
+  echo "$ip"
+else
+  echo "Error: Failed to retrieve the IP address." >&2
+  exit 1
+fi
