@@ -101,6 +101,22 @@ return {
                     on_attach = lsp_attach,
                   }
                 end,
+                ["pylsp"] = function()
+                  local lspconfig = require("lspconfig")
+                  lspconfig.pylsp.setup {
+                    capabilities = capabilities,
+                    settings = {
+                      pylsp = {
+                        plugins = {
+                          pyflakes = { enabled = false, },
+                          pycodestyle = { enabled = false, },
+                          flake8 = { enabled = true, },
+                        },
+                      },
+                    },
+                    on_attach = lsp_attach,
+                  }
+                end,
                 --[[ ["rust_analyzer"] = function()
                   local lspconfig = require("lspconfig")
                   lspconfig.rust_analyzer.setup {
