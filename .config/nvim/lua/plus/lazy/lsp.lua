@@ -44,20 +44,6 @@ return {
           lsp_sig.on_attach({}, bufnr)
         end
 
-        local harper_lsp_attach = function(client, bufnr)
-          local disabled_fts = { "lua", "cpp", "rust" }
-          local curft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-
-          for _, ft in ipairs(disabled_fts) do
-            if ft == curft then
-              client.stop()
-              return
-            end
-          end
-
-          lsp_attach(client, bufnr)
-        end
-
         local rust_lsp_attach = function(client, bufnr)
           vim.lsp.inlay_hint.enable(true, { bufnr })
 
@@ -110,8 +96,9 @@ return {
                 ["harper_ls"] = function()
                   local lspconfig = require("lspconfig")
                   lspconfig.harper_ls.setup {
+                    filetypes = {"markdown"},
                     capabilities = capabilities,
-                    on_attach = harper_lsp_attach,
+                    on_attach = lsp_attach,
                   }
                 end,
                 --[[ ["rust_analyzer"] = function()
