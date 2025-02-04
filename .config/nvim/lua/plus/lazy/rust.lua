@@ -8,6 +8,21 @@ return {
   init = function()
     vim.g.rustaceanvim = {
       server = {
+        default_settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              extraArgs = {
+                "--target-dir", "target/rls"
+              },
+            },
+            runnables = {
+              extraArgs = {
+                "--target-dir",
+                "target/rls/",
+              },
+            },
+          },
+        },
         capabilities = {
           textDocument = {
             completion = {
@@ -38,7 +53,8 @@ return {
         code_actions = {
           -- ui_select_fallback = true,
         }
-      }
+      },
+      dap = { },
     }
   end,
 }
