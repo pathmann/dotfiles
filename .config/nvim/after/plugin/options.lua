@@ -11,6 +11,10 @@ vim.opt.autoindent = true  -- Copy indent from the current line when starting a 
 vim.opt.number = true         -- Absolute line numbers
 vim.opt.relativenumber = true -- Relative line numbers
 
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+vim.cmd [[ highlight CursorLineNr guifg=#FF0000 ctermfg=Red ]]
+
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.showtabline = 2 -- always show the top tab line
