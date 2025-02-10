@@ -9,7 +9,9 @@ return {
   config = function()
     local mv = require("markview")
     mv.setup({
-      initial_state = false,
+      preview = {
+        enable = false,
+      }
     })
     vim.keymap.set("n", "<leader>mp", "<cmd>Markview splitToggle<cr>", { desc = "Toggle markdown preview" })
   end,
