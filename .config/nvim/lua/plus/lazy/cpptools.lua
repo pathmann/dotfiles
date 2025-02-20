@@ -49,6 +49,9 @@ return {
         vim.keymap.set("n", "<leader>md", function()
           createClassDeclaration()
         end, { noremap = true, silent = true, desc = "Make definition" })
+
+        vim.keymap.set("n", "<leader>mD", "<cmd>TSCppDefineClassFunc<cr>", { noremap = true, silent = true, desc = "Make function definition" })
+        vim.keymap.set("v", "<leader>mD", ":TSCppDefineClassFunc<cr>", { noremap = true, silent = true, desc = "Make function definition" })
       end,
     })
 
