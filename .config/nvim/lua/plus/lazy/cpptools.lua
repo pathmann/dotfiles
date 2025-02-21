@@ -37,8 +37,11 @@ return {
       header_extension = "h", -- optional
       source_extension = "cpp", -- optional
       custom_define_class_function_commands = { -- optional
-        TSCppImplWrite = {
-          output_handle = require("nt-cpp-tools.output_handlers").get_add_to_cpp(),
+        TSCppDefineClassFunc = {
+          output_handle = function(output, ctx)
+            output = output:gsub("\n{\n}\n", " {\n\n}\n\n")
+            require("nt-cpp-tools.output_handlers").get_preview_and_apply()(output, ctx)
+          end
         },
       },
     })
