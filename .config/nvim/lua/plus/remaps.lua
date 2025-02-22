@@ -29,8 +29,9 @@ end, { desc = "Clone tab" })
 vim.keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close (tab)" })
 vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
 vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
-vim.keymap.set("i", 'jj', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set("t", 'jj', '<C-\\><C-n>', { noremap = true, silent = true })
+-- moved to / used with betterescape
+--[[ vim.keymap.set("i", 'jj', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set("t", 'jj', '<C-\\><C-n>', { noremap = true, silent = true }) ]]
 vim.keymap.set("t", '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
 local function go_left_or_tab()
