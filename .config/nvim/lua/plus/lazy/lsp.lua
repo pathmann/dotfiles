@@ -117,6 +117,17 @@ return {
                     on_attach = lsp_attach,
                   }
                 end,
+                ["clangd"] = function()
+                  local lspconfig = require("lspconfig")
+                  lspconfig.clangd.setup {
+                    capabilities = capabilities,
+                    cmd = {
+                      "clangd",
+                      "--header-insertion=never",
+                    },
+                    on_attach = lsp_attach,
+                  }
+                end,
                 --[[ ["rust_analyzer"] = function()
                   local lspconfig = require("lspconfig")
                   lspconfig.rust_analyzer.setup {
