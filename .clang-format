@@ -294,6 +294,8 @@ StatementAttributeLikeMacros:
 StatementMacros:
   - Q_UNUSED
   - QT_REQUIRE_VERSION
+  - Q_OBJECT
+  - Q_PROPERTY
 TabWidth: 8
 TableGenBreakInsideDAGArg: DontBreak
 UseTab: Never
