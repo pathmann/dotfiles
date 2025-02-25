@@ -158,7 +158,7 @@ return {
               single_file_support = true,
               filetypes = {"qml"},
               root_dir = function(fname)
-                lspconfig.util.find_git_ancestor(fname)
+                return vim.fn.getcwd()
               end,
             }
           }
