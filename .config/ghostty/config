@@ -9,3 +9,11 @@ background-opacity = 0.9
 resize-overlay = never
 
 confirm-close-surface = false
+
+#pass through tmux shift tab bindings
+keybind = ctrl+shift+right=unbind
+keybind = ctrl+shift+left=unbind
+
+#pass through nvim shift tab bindings
+keybind = ctrl+shift+h=unbind
+keybind = ctrl+shift+l=unbind

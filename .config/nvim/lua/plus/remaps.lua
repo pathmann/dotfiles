@@ -26,6 +26,9 @@ vim.keymap.set("n", "<leader>ct", function()
   vim.api.nvim_set_current_buf(current_buf)
 end, { desc = "Clone tab" })
 
+vim.keymap.set("n", "<C-S-l>", ":tabm +1<cr>", { desc = "Move tab right" })
+vim.keymap.set("n", "<C-S-h>", ":tabm -1<cr>", { desc = "Move tab left" })
+
 vim.keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close (tab)" })
 vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
 vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
