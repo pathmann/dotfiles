@@ -1,6 +1,8 @@
 return {
   "folke/twilight.nvim",
 
+  enabled = false,
+
   config = function()
     local expand = {
       "function",
