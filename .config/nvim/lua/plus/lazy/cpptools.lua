@@ -86,6 +86,9 @@ return {
         TSCppDefineClassFunc = {
           output_handle = function(output, ctx)
             output = clang_format(output)
+            output = "\n" .. output
+            output = output:gsub("}", "}\n")
+            output = output:gsub("{", "{\n")
             require("nt-cpp-tools.output_handlers").get_preview_and_apply()(output, ctx)
           end
         },
