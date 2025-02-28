@@ -6,6 +6,8 @@ return {
     "nvim-tree/nvim-web-devicons"
   },
 
+  ft = "markdown",
+
   config = function()
     local mv = require("markview")
     mv.setup({
