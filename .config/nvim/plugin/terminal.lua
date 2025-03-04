@@ -3,6 +3,8 @@ local terminal_state = {}
 local function create_floating_terminal(opts)
   opts = opts or {}
 
+  local wintitle = opts.title or "Terminal"
+
   local buf = nil
   if vim.api.nvim_buf_is_valid(opts.buf) then
     buf = opts.buf
@@ -26,6 +28,39 @@ local function create_floating_terminal(opts)
   }
 
   local win = vim.api.nvim_open_win(buf, true, win_opts)
+
+  if vim.bo[buf].buftype ~= "terminal" then
+    vim.cmd("terminal")
+  end
+
+  local function update_winbar(upwin)
+    local mode = vim.api.nvim_get_mode().mode
+    local mode_map = {
+      ["nt"] = "NORMAL",
+      ["i"] = "INSERT",
+      ["v"] = "VISUAL",
+      ["V"] = "V-LINE",
+      [""] = "V-BLOCK",
+      ["R"] = "REPLACE",
+      ["c"] = "COMMAND",
+      ["t"] = "TERMINAL"
+    }
+    local mode_display = mode_map[mode] or "UNKNOWN"
+
+    vim.wo[upwin].winbar = "%#PmenuSel# " .. wintitle .. " %=%#Normal# Mode: " .. mode_display
+  end
+
+  local augrp = "Terminal-" .. buf
+  vim.api.nvim_create_augroup(augrp, { clear = true })
+  vim.api.nvim_create_autocmd("ModeChanged", {
+    group = augrp,
+    buffer = buf,
+    callback = function()
+      update_winbar(win)
+    end,
+  })
+
+  update_winbar(win)
 
   -- Return buffer and window handles if needed
   return { buf = buf, win = win }
@@ -53,14 +88,7 @@ local function toggle_terminal(name)
     buf = terminal_state[name].buf
   end
 
-  terminal_state[name] = create_floating_terminal({ buf = buf })
-  buf = terminal_state[name].buf
-  if vim.bo[buf].buftype ~= "terminal" then
-    vim.cmd("terminal")
-    vim.keymap.set("t", "<C-w>", function()
-      toggle_terminal(name)
-    end, { buffer= buf, desc = "Close terminal" })
-  end
+  terminal_state[name] = create_floating_terminal({ buf = buf, title = "Terminal " .. name })
 end
 
 vim.api.nvim_create_user_command("TerminalToggle", function(opts)
