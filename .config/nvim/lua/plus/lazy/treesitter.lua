@@ -4,9 +4,18 @@ return {
   build = ":TSUpdate",
 
   config = function()
+    local is_server = require("plus.utils").is_server()
+    local installs = {"lua", "vim", "python", "sql", "toml", "vimdoc", "query", "markdown", "markdown_inline", "html", "bash", "regex", }
+
+    if not is_server then
+      for _, parser in ipairs({"c", "cpp", "rust", "qmljs", "qmldir", "hyprlang", "latex"}) do
+        table.insert(installs, parser)
+      end
+    end
+
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-      ensure_installed = { "c", "cpp", "lua", "vim", "rust", "python", "sql", "qmljs", "qmldir", "toml", "vimdoc", "query", "markdown", "markdown_inline", "html", "bash", "regex", "hyprlang", "latex" },
+      ensure_installed = installs,
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,
