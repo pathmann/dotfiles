@@ -69,6 +69,8 @@ end
 return {
   "Badhi/nvim-treesitter-cpp-tools",
 
+  enabled = not require("plus.utils").is_server(),
+
   dependencies = {
     "nvim-treesitter/nvim-treesitter"
   },

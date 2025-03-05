@@ -1,6 +1,8 @@
 return {
     "mfussenegger/nvim-dap",
 
+    enabled = not require("plus.utils").is_server(),
+
     dependencies = {
       "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",

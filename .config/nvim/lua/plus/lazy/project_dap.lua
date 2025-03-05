@@ -3,6 +3,8 @@ return {
 
   -- dev = true,
 
+  enabled = not require("plus.utils").is_server(),
+
   dependencies = {
     "nvim-lua/plenary.nvim",
     "mfussenegger/nvim-dap",

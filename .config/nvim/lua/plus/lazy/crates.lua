@@ -1,6 +1,8 @@
 return {
   "saecki/crates.nvim",
 
+  enabled = not require("plus.utils").is_server(),
+
   event = { "BufRead Cargo.toml" },
 
   config = function()

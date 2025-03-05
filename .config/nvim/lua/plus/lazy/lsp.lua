@@ -56,21 +56,27 @@ return {
           lsp_attach(client, bufnr)
         end
 
+        local is_server = require("plus.utils").is_server()
+        local lsplist = {
+          "lua_ls",
+          "sqls",
+          "harper_ls",
+          "bashls",
+          "pylsp",
+        }
+
+        if not is_server then
+          for _, lspname in ipairs({"rust_analyzer", "clangd", "slint_lsp"}) do
+            table.insert(lsplist, lspname)
+          end
+        end
+
         require("mason").setup()
         require("mason-lspconfig").setup({
             automatic_installation = {
               exclude = { "rust_analyzer", }
             },
-            ensure_installed = {
-                "lua_ls",
-                "rust_analyzer",
-                "clangd",
-                "sqls",
-                "harper_ls",
-                "bashls",
-                "pylsp",
-                "slint_lsp",
-            },
+            ensure_installed = lsplist,
             handlers = {
                 function(server_name) -- default handler (optional)
                   if server_name == "rust_analyzer" then

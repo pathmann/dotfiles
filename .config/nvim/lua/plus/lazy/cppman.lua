@@ -1,6 +1,8 @@
 return {
   "madskjeldgaard/cppman.nvim",
 
+  enabled = not require("plus.utils").is_server(),
+
   dependencies = {
     "MunifTanjim/nui.nvim",
   },

@@ -1,4 +1,6 @@
 return {
+  enabled = not require("plus.utils").is_server(),
+
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files

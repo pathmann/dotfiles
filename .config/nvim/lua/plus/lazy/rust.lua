@@ -1,6 +1,8 @@
 return {
   "mrcjkb/rustaceanvim",
 
+  enabled = not require("plus.utils").is_server(),
+
   version = '^5', -- Recommended
 
   lazy = false, -- This plugin is already lazy
