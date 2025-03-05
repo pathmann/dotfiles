@@ -50,6 +50,12 @@ return {
           lsp_attach(client, bufnr)
         end
 
+        local clangd_lsp_attach = function(client, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr })
+
+          lsp_attach(client, bufnr)
+        end
+
         require("mason").setup()
         require("mason-lspconfig").setup({
             automatic_installation = {
@@ -125,7 +131,7 @@ return {
                       "clangd",
                       "--header-insertion=never",
                     },
-                    on_attach = lsp_attach,
+                    on_attach = clangd_lsp_attach,
                   }
                 end,
                 --[[ ["rust_analyzer"] = function()
