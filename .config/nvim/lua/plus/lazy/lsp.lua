@@ -115,6 +115,12 @@ return {
                 end,
                 ["pylsp"] = function()
                   local lspconfig = require("lspconfig")
+                  local flakecfg = nil
+                  local flakepath = vim.fn.expand("$HOME/.config/flake8/.flake8")
+                  if vim.fn.filereadable(flakepath) == 1 then
+                    flakecfg = flakepath
+                    print("found")
+                  end
                   lspconfig.pylsp.setup {
                     capabilities = capabilities,
                     settings = {
@@ -122,7 +128,10 @@ return {
                         plugins = {
                           pyflakes = { enabled = false, },
                           pycodestyle = { enabled = false, },
-                          flake8 = { enabled = true, },
+                          flake8 = {
+                            enabled = true,
+                            config = flakecfg,
+                          },
                         },
                       },
                     },
