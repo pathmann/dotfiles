@@ -98,3 +98,9 @@ end
 vim.keymap.set("n", "<Home>", smart_home, { remap = true })
 vim.keymap.set("i", "<Home>", smart_home, { remap = true })
 
+vim.keymap.set("n", "<leader>pu", function()
+  vim.cmd('put ' .. vim.v.register)
+end, { desc = "paste after in new line" })
+vim.keymap.set("n", "<leader>pU", function()
+  vim.cmd('put! ' .. vim.v.register)
+end, { desc = "paste before in new line" })
