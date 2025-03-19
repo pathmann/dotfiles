@@ -4,7 +4,13 @@ vim.keymap.set("n", "<leader>pv", function()
   if buf_ft == "oil" then
     vim.cmd("silent! bwipeout") -- Close the oil buffer
   end
-  vim.cmd("Ex")
+  local bufname = vim.api.nvim_buf_get_name(0)
+  if bufname:startswith("suda://") then
+    local fname = bufname:sub(8)
+    vim.cmd.Ex(vim.fn.fnamemodify(fname, ":h"))
+  else
+    vim.cmd("Ex")
+  end
 end, { desc = "To netrw" })
 
 vim.keymap.set("n", "<C-t>", function()
