@@ -119,7 +119,6 @@ return {
                   local flakepath = vim.fn.expand("$HOME/.config/flake8/.flake8")
                   if vim.fn.filereadable(flakepath) == 1 then
                     flakecfg = flakepath
-                    print("found")
                   end
                   lspconfig.pylsp.setup {
                     capabilities = capabilities,
