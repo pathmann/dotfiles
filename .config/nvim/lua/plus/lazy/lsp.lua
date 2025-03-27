@@ -32,6 +32,10 @@ return {
           vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
           vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
           vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+          vim.keymap.set('n', '<leader>hv', function()
+            vim.lsp.buf.clear_references()
+            vim.lsp.buf.document_highlight()
+          end, { buffer = bufnr, desc = 'Highlight variable' })
           vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
           vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
           vim.keymap.set('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<cr>', { buffer = bufnr, desc = "Apply fix" })
@@ -227,5 +231,10 @@ return {
         })
         
         --vim.lsp.set_log_level("debug")
+
+        vim.api.nvim_set_hl(0, "LspReferenceText", { fg = "#000000", bg = "#FFD700", bold = true })    -- Black text on bright gold
+        vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = "#FFFFFF", bg = "#00BFFF", underline = true })  -- White text on deep sky blue
+        vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = "#FFFFFF", bg = "#FF4500", bold = true })  -- White text on strong orange-red
+
     end
 }
