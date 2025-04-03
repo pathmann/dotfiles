@@ -7,6 +7,8 @@ CURRENT_DIR_PATH="$(readlink -f "$(realpath -e "$(pwd)")")"
 GLOBAL_CONF_DIR_PATH='/etc/customizepkg.d'
 USER_CONF_DIR_PATH="${HOME}/.customizepkg"
 
+source /etc/makepkg.conf
+
 pkgbuild_path="${CURRENT_DIR_PATH}/PKGBUILD"
 pkgbuild_copy_path="${pkgbuild_path}.original"
 
