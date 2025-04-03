@@ -8,8 +8,8 @@ return {
         block = "<leader>/*",
       },
       opleader = {
-        line = "//",
-        block = "/*",
+        line = "<leader>//",
+        block = "<leader>/*",
       },
       extra = nil,
       mappings = {
