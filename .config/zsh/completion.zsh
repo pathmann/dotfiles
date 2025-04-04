@@ -29,7 +29,10 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 _force_rehash() { 
   (( CURRENT == 1 )) && rehash 
   return 1   # Because we didn't really complete anything 
-} 
+}
+
+zstyle ':completion:*' special-dirs true 
+
 zstyle ':completion:*' completer _oldlist _expand _force_rehash _complete
 
 zstyle ':completion:*:processes-names' command 'ps c -u ${USER} -o command | uniq'
