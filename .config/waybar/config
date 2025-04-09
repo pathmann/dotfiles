@@ -79,7 +79,7 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%d.%m.%Y %H:%M}",
+        "format": "{:%a %d.%m.%Y %H:%M}",
         "locale": "de_DE.utf-8",
         "timezone": "Europe/Berlin"
     },
