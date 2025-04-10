@@ -136,6 +136,10 @@ return {
                             enabled = true,
                             config = flakecfg,
                           },
+                          jedi_completion = {
+                            enabled = true,
+                            include_params = true,
+                          },
                         },
                       },
                     },
