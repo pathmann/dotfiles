@@ -79,6 +79,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+
 vim.keymap.set("n", "<leader>o", "o<ESC>", { desc = "Insert newline" })
 vim.keymap.set("n", "<leader>O", "O<ESC>", { desc = "Insert newline previous line" })
 
