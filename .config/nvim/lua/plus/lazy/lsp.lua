@@ -58,6 +58,58 @@ return {
         local clangd_lsp_attach = function(client, bufnr)
           vim.lsp.inlay_hint.enable(true, { bufnr })
 
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              local params = vim.lsp.util.make_range_params()
+              local line = params.range.start.line
+
+              -- Get Neovim-style diagnostics for the current line
+              local diags = vim.diagnostic.get(bufnr, { lnum = line })
+
+              -- Manually convert to LSP-style diagnostics
+              local lsp_diagnostics = vim.tbl_map(function(d)
+                return {
+                  range = {
+                    start = { line = d.lnum, character = d.col },
+                    ["end"] = { line = d.end_lnum or d.lnum, character = d.end_col or (d.col + 1) },
+                  },
+                  severity = d.severity,
+                  message = d.message,
+                  source = d.source,
+                  code = d.code,
+                }
+              end, diags)
+
+              params.context = {
+                only = { "quickfix" },
+                diagnostics = lsp_diagnostics,
+              }
+
+              client.request("textDocument/codeAction", params, function(err, actions)
+                if err or not actions then return end
+
+                local afapplied = false
+
+                for _, action in ipairs(actions) do
+                  if action.title:lower() == "change '.' to '->'" then
+                    if action.edit then
+                      vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+                      afapplied = true
+                    elseif action.command then
+                      vim.lsp.buf.execute_command(action.command)
+                      afapplied = true
+                    end
+                  end
+                end
+
+                if afapplied then
+                  vim.notify("auto fixes applied")
+                end
+              end, bufnr)
+            end,
+          })
+
           lsp_attach(client, bufnr)
         end
 
