@@ -68,6 +68,11 @@ return {
                 return
               end
 
+              -- mark buffer to avoid infinite loop
+              if vim.b._autofix_in_progress then
+                return
+              end
+
               -- Get visible lines in current window
               local first = vim.fn.line("w0") - 1
               local last = vim.fn.line("w$") - 1
@@ -132,6 +137,12 @@ return {
                       vim.api.nvim_buf_clear_namespace(bufnr, hl_ns, 0, -1)
                     end,
                   })
+
+                  vim.b._autofix_in_progress = true
+                  vim.schedule(function()
+                    vim.cmd("write")
+                    vim.b._autofix_in_progress = false
+                  end)
 
                   vim.notify("auto fixes applied")
                 end
