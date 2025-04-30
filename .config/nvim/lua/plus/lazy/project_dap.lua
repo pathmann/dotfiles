@@ -11,8 +11,196 @@ return {
   },
 
   config = function()
+    local plugutil = require("dap-project-configuration.utils")
+
+    local function detect_lang(cwd, curbuf)
+      local handle = vim.uv.fs_scandir(cwd)
+      if handle then
+        while true do
+          local name, type = vim.uv.fs_scandir_next(handle)
+          if not name then
+            break
+          end
+
+          if type == 'file' then
+            if name:sub(-4) == ".pro" then
+              return "cpp"
+            end
+          end
+        end
+      end
+
+      return plugutil.detect_language(cwd, curbuf)
+    end
+
     local plug = require("dap-project-configuration")
     plug.setup({
+      detect_language = detect_lang,
+      config_templates = {
+        rust = function(cwd)
+          return [[
+local projname = vim.fs.basename(vim.fn.getcwd())
+
+return {
+  Debug = {
+    prelaunch = {
+      p1 = {
+        cwd = vim.fn.getcwd(),
+        cmd = "cargo",
+        args = {"build"},
+        env = vim.fn.environ(),
+        output = {
+          autoscroll = true,
+          filetype = "qf",
+          close_on_success = true,
+        },
+        wait = true,
+      },
+    },
+    dap = {
+      debug = {
+        name = projname,
+        type = "codelldb",
+        request = "launch",
+        program = function()
+          return vim.fn.getcwd() .. "/target/debug/" .. projname
+        end,
+        env = vim.fn.environ(),
+      },
+    },
+    run = {
+      launch = "debug",
+    },
+  },
+
+}
+          ]]
+        end,
+        cpp = function(cwd)
+          return [[
+local app = "appname"
+local builddir = "]] .. cwd .. [[/build"
+local srcdir = "]] .. cwd .. [["
+local workdir = "]] .. cwd .. [[/build"
+
+return {
+  QMake = {
+    prelaunch = {
+      p1 = {
+        cwd = builddir,
+        cmd = "qmake",
+        args = { srcdir },
+        output = {
+          target = "buffer",
+          reuse = true,
+          close_on_success = true,
+          stop_on_close = true,
+        },
+        wait = true,
+        env = {},
+
+      },
+    },
+  },
+  Make = {
+    prelaunch = {
+      p1 = {
+        cwd = builddir,
+        cmd = "make",
+        args = {"-j10"},
+        env = vim.fn.environ(),
+        wait = true,
+        output = {
+          target = "buffer",
+          close_on_success = false,
+          reuse = true,
+          autoscroll = true,
+          filetype = "qf",
+        },
+      }
+    },
+  },
+  Clean = {
+    prelaunch = {
+      p1 = {
+        cwd = builddir,
+        cmd = "make",
+        args = { "clean" },
+        env = vim.fn.environ(),
+        wait = true,
+        output = {
+          target = "buffer",
+          close_on_success = true,
+          autoscroll = true,
+          filetype = "qf",
+        },
+      },
+    },
+  },
+  App = {
+    prelaunch = {
+      rackmake = {
+        cwd = builddir,
+        cmd = "make",
+        args = {"-j10"},
+        env = vim.fn.environ(),
+        wait = true,
+        output = {
+          close_on_success = true,
+          autoscroll = true,
+        },
+      }
+    },
+    dap = {
+     debug = {
+        name = app,
+        type = "gdb",
+        request = "launch",
+        cwd = workdir .. "/rack",
+        program = function()
+          return builddir .. "/src/rack/rack"
+        end,
+        args = {},
+        env = vim.fn.environ(),
+      },
+    },
+    run = {
+      launch = "debug",
+      output = {
+        autoscroll = true,
+        close_on_success = false,
+      }
+    }
+  },
+}
+          ]]
+
+        end,
+        python = function(cwd)
+          return [[
+return {
+  Run = {
+    dap = nil,
+    run = {
+      launch = {
+        cwd = "]] .. cwd .. [[",
+        cmd = "python",
+        args = { "main.py" },
+        env = vim.fn.environ(),
+        output = {
+          autoscroll = true,
+          close_on_success = false,
+          reuse = true,
+          stop_on_close = true,
+        }
+      },
+    },
+  },
+}
+          ]]
+
+        end,
+      },
       ignore_win_to_close = function(wid)
         if vim.wo[wid].winhl == 'Normal:Beacon' then
           return true
