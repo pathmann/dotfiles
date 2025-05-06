@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 area=$(slurp -o -w 1 -c 'ff0000ff')
 if [ "$?" == "0" ]; then
-	echo "yep $area"
-
 	area=( $(grep -Eo '[[:digit:]]+' <<<"$area") )
 
 	spx=$(echo "${area[0]} +1" | bc)
