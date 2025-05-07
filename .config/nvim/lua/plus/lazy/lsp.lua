@@ -243,6 +243,9 @@ return {
                     cmd = {
                       "clangd",
                       "--header-insertion=never",
+                      "--background-index",
+                      "--all-scopes-completion",
+                      "--pch-storage=memory",
                     },
                     on_attach = clangd_lsp_attach,
                   }
