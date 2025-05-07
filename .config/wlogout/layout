@@ -6,19 +6,19 @@
 }
 {
     "label" : "shutdown",
-    "action" : "systemctl poweroff",
+    "action" : "$HOME/bin/hyprland-out.sh --shutdown",
     "text" : "Shutdown",
     "keybind" : "s"
 }
 {
     "label" : "logout",
-    "action" : "killall -9 Hyprland sleep 2 || killall -9 sway sleep 2",
+    "action" : "$HOME/bin/hyprland-out.sh --logout",
     "text" : "Exit",
     "keybind" : "e"
 }
 {
     "label" : "reboot",
-    "action" : "systemctl reboot",
+    "action" : "$HOME/bin/hyprland-out.sh --reboot",
     "text" : "Reboot",
     "keybind" : "r"
 }
