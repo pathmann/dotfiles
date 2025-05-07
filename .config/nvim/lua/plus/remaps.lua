@@ -99,6 +99,7 @@ local function smart_home()
 end
 
 vim.keymap.set("n", "<Home>", smart_home, { remap = true })
+vim.keymap.set("n", "^", smart_home, { remap = true })
 vim.keymap.set("i", "<Home>", smart_home, { remap = true })
 
 vim.keymap.set("n", "<leader>pu", function()
