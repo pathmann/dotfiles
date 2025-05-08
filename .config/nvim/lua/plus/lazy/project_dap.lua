@@ -74,7 +74,7 @@ return {
   },
 
 }
-          ]]
+]]
         end,
         cpp = function(cwd)
           return [[
@@ -90,6 +90,7 @@ return {
         cwd = builddir,
         cmd = "qmake",
         args = { srcdir },
+        env = vim.fn.environ(),
         output = {
           target = "buffer",
           reuse = true,
@@ -97,8 +98,6 @@ return {
           stop_on_close = true,
         },
         wait = true,
-        env = {},
-
       },
     },
   },
@@ -156,9 +155,9 @@ return {
         name = app,
         type = "gdb",
         request = "launch",
-        cwd = workdir .. "/rack",
+        cwd = workdir .. "/" .. app,
         program = function()
-          return builddir .. "/src/rack/rack"
+          return builddir .. "/" .. app
         end,
         args = {},
         env = vim.fn.environ(),
@@ -173,7 +172,7 @@ return {
     }
   },
 }
-          ]]
+]]
 
         end,
         python = function(cwd)
@@ -197,7 +196,7 @@ return {
     },
   },
 }
-          ]]
+]]
 
         end,
       },
