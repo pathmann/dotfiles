@@ -155,12 +155,12 @@ return {
         name = app,
         type = "gdb",
         request = "launch",
-        cwd = workdir .. "/" .. app,
+        cwd = workdir,
         program = function()
           return builddir .. "/" .. app
         end,
         args = {},
-        env = vim.fn.environ(),
+        env = vim.tbl_deep_extend("force", {DISPLAY=":0"}, vim.fn.environ()),
       },
     },
     run = {
