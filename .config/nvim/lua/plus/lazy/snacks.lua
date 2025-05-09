@@ -10,5 +10,11 @@ return {
     picker = { enabled = true },
     notifier = { enabled = true },
     debug = { enabled = true },
+  },
+
+  keys = {
+    { "<leader>sn", function()
+      Snacks.notifier.show_history()
+    end, desc = "Show notification history" },
   }
 }
