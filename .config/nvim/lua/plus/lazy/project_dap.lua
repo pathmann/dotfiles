@@ -160,7 +160,7 @@ return {
           return builddir .. "/" .. app
         end,
         args = {},
-        env = vim.tbl_deep_extend("force", {DISPLAY=":0"}, vim.fn.environ()),
+        env = vim.tbl_deep_extend("force", {DISPLAY=":0", QT_ASSUME_STDERR_HAS_CONSOLE="1"}, vim.fn.environ()),
       },
     },
     run = {
