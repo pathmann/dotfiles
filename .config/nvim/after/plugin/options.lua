@@ -22,9 +22,3 @@ vim.g.netrw_sort_options = "i"
 vim.g.netrw_sort_sequence = "[/]$"
 vim.g.netrw_bufsettings = 'noma nomod nu nornu nobl nowrap ro'
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    vim.opt.formatoptions:remove({ "o", "r" })
-  end,
-})
