@@ -16,6 +16,27 @@ M.opts = {
   },
 }
 
+M.code_actions = function(actions)
+  for _, action in ipairs(actions) do
+    local header, cpptype = action.title:match('Include "(.+)%.h" for symbol (.+)')
+    if header and cpptype and cpptype:startswith('Q') then
+
+      if action.edit then
+        for _, change in pairs(action.edit.changes or {}) do
+          for _, edit in ipairs(change) do
+            if edit.newText:match('#include ".+%.h"\n') then
+              edit.newText = "#include <" .. cpptype .. ">\n"
+              action.title = "Include <" .. cpptype .. "> for symbol " .. cpptype
+            end
+          end
+        end
+      end
+    end
+  end
+
+  return actions
+end
+
 M.on_attach = function(client, bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
