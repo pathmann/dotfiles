@@ -2,6 +2,78 @@ local Utils = require("plus.lazy.lsp.utils")
 
 local M = {}
 
+
+local function custom_code_actions(mod, client, bufnr)
+  local diags = vim.diagnostic.get(bufnr)
+
+  -- Manually convert to LSP-style diagnostics
+  local lsp_diagnostics = vim.tbl_map(function(d)
+    return {
+      range = {
+        start = { line = d.lnum, character = d.col },
+        ["end"] = { line = d.end_lnum or d.lnum, character = d.end_col or (d.col + 1) },
+      },
+      severity = d.severity,
+      message = d.message,
+      source = d.source,
+      code = d.code,
+    }
+  end, diags)
+
+  local params = vim.lsp.util.make_range_params()
+  params.context = {
+    only = { "quickfix" },
+    diagnostics = lsp_diagnostics,
+  }
+
+  client.request("textDocument/codeAction", params, function(err, actions)
+    if err then
+      vim.notify("Error getting code actions: " .. err.message, vim.log.levels.ERROR)
+      return
+    end
+
+    if not actions or vim.tbl_isempty(actions) then
+      vim.notify("No code actions available", vim.log.levels.INFO)
+      return
+    end
+
+    local newactions = mod.code_actions(actions)
+
+    vim.ui.select(newactions, {
+      prompt = "Select Code Action:",
+      format_item = function(item)
+        return item.title
+      end,
+    }, function(item)
+      if not item then return end
+      if item.edit then
+        vim.lsp.util.apply_workspace_edit(item.edit, "utf-16")
+      end
+      if item.command then
+        vim.lsp.buf.execute_command(item.command)
+      end
+    end)
+  end)
+end
+
+local function code_actions(client, bufnr)
+  local serv_mods = Utils.server_modules()
+  for _, modname in ipairs(serv_mods) do
+    local m = require(modname)
+    if m.name == client.name then
+      if m.code_actions then
+        custom_code_actions(m, client, bufnr)
+        return
+      end
+
+      break
+    end
+  end
+
+  -- fallback
+  vim.lsp.buf.code_action()
+end
+
 M.create = function()
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("plus-lsp-attach", { clear = true }),
@@ -24,7 +96,9 @@ M.create = function()
       end, { buffer = bufnr, desc = 'Highlight variable' })
       vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = bufnr, desc = "Rename" })
       -- vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-      vim.keymap.set('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<cr>', { buffer = bufnr, desc = "Apply fix" })
+      vim.keymap.set('n', '<leader>af', function()
+        code_actions(client, bufnr)
+      end, { buffer = bufnr, desc = "Apply fix" })
 
       local lsp_sig = require("lsp_signature")
       vim.keymap.set("i", "<C-g>", function()

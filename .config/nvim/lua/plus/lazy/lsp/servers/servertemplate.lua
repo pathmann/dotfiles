@@ -21,4 +21,9 @@ M.on_attach = function(client, bufnr)
 
 end
 
+-- optional, return filtered or manipulated code actions
+M.code_actions = function(actions)
+
+end
+
 return M
