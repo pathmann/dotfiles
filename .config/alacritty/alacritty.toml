@@ -8,6 +8,7 @@ background = "#181818"
 
 [window]
 opacity = 0.9
+startup_mode = "Maximized"
 
 [keyboard]
 bindings = [
