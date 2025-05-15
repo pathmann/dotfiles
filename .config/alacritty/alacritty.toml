@@ -1,6 +1,6 @@
 [font]
 size=14.0
-normal = { family = "Hack NerdFont", style = "Regular" }
+normal = { family = "Hack Nerd Font", style = "Regular" }
 
 [colors.primary]
 foreground = "#d8d8d8"
@@ -8,6 +8,7 @@ background = "#181818"
 
 [window]
 opacity = 0.9
+startup_mode = "Maximized"
 
 [keyboard]
 bindings = [
