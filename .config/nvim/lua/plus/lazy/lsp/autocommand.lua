@@ -20,7 +20,7 @@ local function custom_code_actions(mod, client, bufnr)
     }
   end, diags)
 
-  local params = vim.lsp.util.make_range_params()
+  local params = vim.lsp.util.make_range_params(0, "utf-8")
   params.context = {
     only = { "quickfix" },
     diagnostics = lsp_diagnostics,

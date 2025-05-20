@@ -20,7 +20,6 @@ M.code_actions = function(actions)
   for _, action in ipairs(actions) do
     local header, cpptype = action.title:match('Include "(.+)%.h" for symbol (.+)')
     if header and cpptype and cpptype:startswith('Q') then
-
       if action.edit then
         for _, change in pairs(action.edit.changes or {}) do
           for _, edit in ipairs(change) do
@@ -76,7 +75,7 @@ M.on_attach = function(client, bufnr)
         }
       end, visible_diags)
 
-      local params = vim.lsp.util.make_range_params()
+      local params = vim.lsp.util.make_range_params(0, "utf-8")
       params.context = {
         only = { "quickfix" },
         diagnostics = lsp_diagnostics,
