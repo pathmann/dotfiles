@@ -39,8 +39,10 @@ return {
         )
         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+        vim.lsp.inlay_hint.enable(true)
+
         vim.lsp.config("*", {
-          capabilities = capabilities
+          capabilities = capabilities,
         })
 
         configure_servers()

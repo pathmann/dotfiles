@@ -81,8 +81,6 @@ M.create = function()
       local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
       local bufnr = args.buf
 
-      vim.lsp.inlay_hint.enable(true, { bufnr })
-
       vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', { buffer = bufnr, desc = "Hover" })
       vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = bufnr, desc = "To definition" })
       vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { buffer = bufnr, desc = "To declaration" })
