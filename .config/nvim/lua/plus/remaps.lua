@@ -76,6 +76,14 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<BS>", "u", { remap = true, buffer = true })
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "help",
+  callback = function(opts)
+    vim.keymap.set("n", "gd", "<C-]>", { silent = true, buffer = opts.buf })
+  end,
+})
+
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 
