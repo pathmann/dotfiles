@@ -21,3 +21,4 @@ vim.g.netrw_sort_options = "i"
 vim.g.netrw_sort_sequence = "[/]$"
 vim.g.netrw_bufsettings = 'noma nomod nu nornu nobl nowrap ro'
 
+vim.opt.showtabline = 2 -- always show the top tab line
