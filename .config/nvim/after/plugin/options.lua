@@ -22,3 +22,23 @@ vim.g.netrw_sort_sequence = "[/]$"
 vim.g.netrw_bufsettings = 'noma nomod nu nornu nobl nowrap ro'
 
 vim.opt.showtabline = 2 -- always show the top tab line
+
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
+--don't know why, but necessary to be able to use folding without manually setting foldmethod=expr again
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  callback = function()
+    vim.defer_fn(function()
+      vim.opt_local.foldmethod = "expr"
+      vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt_local.foldenable = true
+      vim.opt_local.foldlevel = 99
+      vim.opt_local.foldlevelstart = 99
+      vim.cmd("silent! normal! zx")
+    end, 100) -- wait 100ms to allow Tree-sitter to attach
+  end,
+})
