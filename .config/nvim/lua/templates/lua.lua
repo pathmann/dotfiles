@@ -1,6 +1,10 @@
 local utils = require("new-file-template.utils")
 
 local function base_template(relative_path, filename)
+  if filename:endswith("Luapad.lua") then
+    return ""
+  end
+
   return [[
 local M = {}
 
