@@ -31,6 +31,7 @@ return {
       require("plus.lazy.dap.ui")
       require("plus.lazy.dap.cpp")
       require("plus.lazy.dap.rust")
+      require("plus.lazy.dap.python")
 
       require('dap').set_log_level('TRACE')
     end,
