@@ -20,6 +20,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>-", "<cmd>Oil<CR>", { desc = "Parent dir in oil" })
+    vim.keymap.set("n", "<leader>p-", "<cmd>Oil<CR>", { desc = "Parent dir in oil" })
   end,
 }
