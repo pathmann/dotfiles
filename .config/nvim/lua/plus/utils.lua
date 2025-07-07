@@ -22,4 +22,17 @@ M.is_server = function()
   return false
 end
 
+M.set_local_folding = function(buf)
+  vim.api.nvim_buf_call(buf, function()
+    vim.opt_local.foldmethod = "expr"
+    vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt_local.foldenable = true
+    vim.opt_local.foldlevel = 99
+    vim.opt_local.foldlevelstart = 99
+    if vim.fn.mode() == "n" then
+      vim.cmd("silent! normal! zx")
+    end
+  end)
+end
+
 return M
