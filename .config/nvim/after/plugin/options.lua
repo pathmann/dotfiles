@@ -15,7 +15,6 @@ vim.opt.relativenumber = true -- Relative line numbers
 
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
-vim.cmd [[ highlight CursorLineNr guifg=#FF0000 ctermfg=Red ]]
 
 vim.opt.clipboard = "unnamedplus"
 

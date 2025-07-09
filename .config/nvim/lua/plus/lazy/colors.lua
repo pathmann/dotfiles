@@ -4,6 +4,20 @@ return {
 
   opts = {
     transparent = true,
+    on_highlights = function(hl, colors)
+      hl.LineNr = {
+        fg = colors.blue
+      }
+      hl.LineNrAbove = {
+        fg = colors.blue
+      }
+      hl.LineNrBelow = {
+        fg = colors.blue
+      }
+      hl.CursorLineNr = {
+        fg = "#FF0000",
+      }
+    end,
   },
 
   config = function(_, opts)
