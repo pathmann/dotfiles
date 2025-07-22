@@ -96,19 +96,29 @@ vim.keymap.set("n", "<leader>O", "O<ESC>", { desc = "Insert newline previous lin
 vim.keymap.set('c', '<C-Down>', '<C-n>', { noremap = true, silent = true })
 vim.keymap.set('c', '<C-Up>', '<C-p>', { noremap = true, silent = true })
 
-local function smart_home()
+local function smart_caret_motion()
   local col = vim.fn.col('.')
-  local first_non_whitespace = vim.fn.match(vim.fn.getline('.'), '\\S') + 1
-  if col == first_non_whitespace then
-    vim.cmd('normal! 0')
-  else
-    vim.cmd('normal! ^')
-  end
+  local first_non_ws = vim.fn.match(vim.fn.getline('.'), '\\S') + 1
+  return (col == first_non_ws) and '0' or '^'
 end
 
-vim.keymap.set("n", "<Home>", smart_home, { remap = true })
-vim.keymap.set("n", "^", smart_home, { remap = true })
-vim.keymap.set("i", "<Home>", smart_home, { remap = true })
+vim.keymap.set("n", "^", function()
+  vim.cmd("normal! " .. smart_caret_motion())
+end, { noremap = true, desc = "Smart ^ motion" })
+vim.keymap.set("n", "<Home>", function()
+  vim.cmd("normal! " .. smart_caret_motion())
+end, { noremap = true, desc = "Smart Home motion" })
+vim.keymap.set("o", "^", function()
+  return smart_caret_motion()
+end, { expr = true, noremap = true, desc = "Smart ^ motion for operators" })
+vim.keymap.set("i", "<Home>", function()
+  local motion = smart_caret_motion()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<Esc>" .. motion .. "i", true, false, true),
+    "n",
+    false
+  )
+end, { noremap = true, desc = "Smart Home in insert mode" })
 
 vim.keymap.set("n", "<leader>pu", function()
   vim.cmd('put ' .. vim.v.register)
