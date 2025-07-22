@@ -26,6 +26,7 @@ return {
         "hrsh7th/nvim-cmp",
         "ray-x/lsp_signature.nvim",
         "L3MON4D3/LuaSnip",
+        "SergioRibera/cmp-dotenv",
     },
 
     config = function()
@@ -107,6 +108,7 @@ return {
             { name = 'nvim_lsp' },
             { name = 'luasnip' },
           },
+          { { name = "dotenv" } },
           {
             { name = 'buffer' },
           }),
