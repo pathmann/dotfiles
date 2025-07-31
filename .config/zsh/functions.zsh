@@ -106,7 +106,7 @@ function do_git {
 
     if [ -n "$1" ]; then
         if [ "$1" = "diff" ]; then
-            if [[ ! "$*" == *-p* ]] then
+            if [[ ! "$*" == *-p* ]]; then
                 DIFFIT=true
                 shift
             fi
