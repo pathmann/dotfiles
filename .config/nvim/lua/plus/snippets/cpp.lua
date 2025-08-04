@@ -115,4 +115,32 @@ for ({} : {}) {{
     i(2, "container"),
     i(3, ""),
   })),
+
+  --the closing bracket will be automatically added by nvim-autopairs!
+  s({
+    trig = "switch (",
+    condition = not_in_comment_or_string,
+  }, fmt([[
+switch ({} {{
+  {}
+  default:
+    break;
+}}]], {
+    i(1, ""),
+    i(2, ""),
+  })),
+
+  s({
+    trig = "try ",
+    condition = not_in_comment_or_string,
+  }, fmt([[
+try {{
+  {}
+}}
+catch (const std::exception& e) {{
+  {}
+}}]], {
+    i(1, ""),
+    i(2, ""),
+  })),
 }
