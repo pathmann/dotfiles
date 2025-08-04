@@ -59,7 +59,7 @@ class {} {{
   Q_OBJECT
 
   public:
-    {}();
+    explicit {}(QObject* parent = nullptr);
     ~{}();
 
   signals:
