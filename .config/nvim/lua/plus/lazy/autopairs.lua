@@ -13,9 +13,9 @@ return {
     plug.setup(opts)
 
     plug.get_rules("{")[1].not_filetypes = { "jinja" }
-    plug.add_rule(Rule("{%- if -%}", "{%- endif -%}", "jinja"))
-    plug.add_rule(Rule("{% if %}", "{% endif %}", "jinja"))
-    plug.add_rule(Rule("{%- for -%}", "{%- endfor -%}", "jinja"))
-    plug.add_rule(Rule("{% for %}", "{% endfor %}", "jinja"))
+    plug.add_rule(Rule("{%%%- if.- %-%%}", "{%- endif -%}", "jinja"):use_regex(true))
+    plug.add_rule(Rule("{%% if.- %%}", "{% endif %}", "jinja"):use_regex(true))
+    plug.add_rule(Rule("{%%%- for.- %-%%}", "{%- endfor -%}", "jinja"):use_regex(true))
+    plug.add_rule(Rule("{%% for.- %%}", "{% endfor %}", "jinja"):use_regex(true))
   end
 }
