@@ -213,6 +213,27 @@ return {
     vim.keymap.set("n", "<leader>sr", "<cmd>ProjectDapSelect<CR>", { desc = "Select DAP config" })
     vim.keymap.set("n", "<leader>tr", "<cmd>ProjectDapToggleDap<CR>", { desc = "Toggle Run Dap" })
     vim.keymap.set("n", "<leader>ro", function()
+      local cfgpath = vim.fn.fnamemodify(vim.fn.getcwd() .. "/.nvim-dap-project-configuration.lua", ":p")
+
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) then
+          local buf_path = vim.api.nvim_buf_get_name(buf)
+          if vim.fn.fnamemodify(buf_path, ":p") == cfgpath then
+            for tab = 1, vim.fn.tabpagenr('$') do
+              local wins = vim.fn.tabpagebuflist(tab)
+              for _, b in ipairs(wins) do
+                if b == buf then
+                  vim.cmd(tab .. "tabnext")
+                  return
+                end
+              end
+            end
+
+            break
+          end
+        end
+      end
+
       vim.cmd("tabnew")
       vim.cmd("e " .. vim.fn.getcwd() .. "/.nvim-dap-project-configuration.lua")
     end, { desc = "Open dap config" })
