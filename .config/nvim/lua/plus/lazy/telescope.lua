@@ -38,7 +38,7 @@ return {
       builtin.grep_string({
         search = vim.fn.input("Grep >"),
         additional_args = function()
-          return { "--ignore-case" }
+          return { "--smart-case" }
         end,
         attach_mappings = function(prompt_bufnr, map)
           local action_state = require('telescope.actions.state')
@@ -66,7 +66,7 @@ return {
         search = vim.fn.input("Grep (current dir) > "),
         cwd = buf_dir,
         additional_args = function()
-          return { "--ignore-case" }
+          return { "--smart-case" }
         end,
         attach_mappings = function(prompt_bufnr, map)
           local action_state = require('telescope.actions.state')
