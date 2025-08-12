@@ -16,7 +16,6 @@ return {
       mappings = {
         n = {
           ["<leader><CR>"] = function(prompt_bufnr)
-            print("muhaha")
             local sel = action_state.get_selected_entry()
             actions.close(prompt_bufnr)
             if sel ~= nil then
@@ -54,6 +53,8 @@ return {
         end,
       })
     end, { desc = "Find in current dir" })
+
+    vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = "List open buffers" }) 
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",
