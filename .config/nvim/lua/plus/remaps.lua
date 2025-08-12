@@ -133,3 +133,12 @@ vim.keymap.set('i', '<S-Tab>', function()
   vim.cmd('startinsert!')
   vim.fn.cursor(vim.fn.line('.'), math.max(1, col - vim.bo.shiftwidth))
 end, { desc = 'De-indent line in insert mode' })
+
+vim.keymap.set({'n', 'x'}, '<leader>d', function()
+  local old = vim.o.clipboard
+  vim.o.clipboard = ""
+  vim.api.nvim_feedkeys('"_d', 'n', false)
+  vim.schedule(function()
+    vim.o.clipboard = old
+  end)
+end, { noremap = true, silent = true })
