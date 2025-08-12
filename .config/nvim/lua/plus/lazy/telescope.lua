@@ -37,6 +37,9 @@ return {
     vim.keymap.set('n', '<leader>pf', function()
       builtin.grep_string({
         search = vim.fn.input("Grep >"),
+        additional_args = function()
+          return { "--ignore-case" }
+        end,
         attach_mappings = function(prompt_bufnr, map)
           local action_state = require('telescope.actions.state')
           local actions = require('telescope.actions')
@@ -56,30 +59,33 @@ return {
       })
     end, { desc = "Project find" })
 
-vim.keymap.set('n', '<leader>cf', function()
-  local buf_dir = vim.fn.expand('%:p:h')
+    vim.keymap.set('n', '<leader>cf', function()
+      local buf_dir = vim.fn.expand('%:p:h')
 
-  builtin.grep_string({
-    search = vim.fn.input("Grep (current dir) > "),
-    cwd = buf_dir,
-    attach_mappings = function(prompt_bufnr, map)
-      local action_state = require('telescope.actions.state')
-      local actions = require('telescope.actions')
+      builtin.grep_string({
+        search = vim.fn.input("Grep (current dir) > "),
+        cwd = buf_dir,
+        additional_args = function()
+          return { "--ignore-case" }
+        end,
+        attach_mappings = function(prompt_bufnr, map)
+          local action_state = require('telescope.actions.state')
+          local actions = require('telescope.actions')
 
-      map('i', '<CR>', function()
-        local selection = action_state.get_selected_entry()
-        actions.close(prompt_bufnr)
-        if selection ~= nil then
-          vim.cmd('tabnew ' .. selection.path)
-          vim.cmd(':' .. selection.lnum)
-          vim.cmd('norm zz')
-        end
-      end)
+          map('i', '<CR>', function()
+            local selection = action_state.get_selected_entry()
+            actions.close(prompt_bufnr)
+            if selection ~= nil then
+              vim.cmd('tabnew ' .. selection.path)
+              vim.cmd(':' .. selection.lnum)
+              vim.cmd('norm zz')
+            end
+          end)
 
-      return true
-    end,
-  })
-end, { desc = "Find in current dir" })
+          return true
+        end,
+      })
+    end, { desc = "Find in current dir" })
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",
