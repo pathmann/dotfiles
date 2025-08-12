@@ -1,3 +1,6 @@
+local action_state = require('telescope.actions.state')
+local actions = require('telescope.actions')
+
 return {
   'nvim-telescope/telescope.nvim',
 
@@ -8,31 +11,28 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
 
-  config = function()
-    require("telescope").setup({})
+  opts = {
+    defaults = {
+      mappings = {
+        n = {
+          ["<leader><CR>"] = function(prompt_bufnr)
+            print("muhaha")
+            local sel = action_state.get_selected_entry()
+            actions.close(prompt_bufnr)
+            if sel ~= nil then
+              vim.cmd("tabnew " .. sel.path)
+            end
+          end,
+        },
+      }
+    }
+  },
+
+  config = function(_, opts)
+    require("telescope").setup(opts)
     local builtin = require('telescope.builtin')
 
-    vim.keymap.set('n', '<leader>ff', function()
-      builtin.find_files({
-        attach_mappings = function(prompt_bufnr, map)
-          local action_state = require('telescope.actions.state')
-          local actions = require('telescope.actions')
-
-          -- Custom mapping for Enter key to open selected file in a new tab
-          map('i', '<CR>', function()
-            local selection = action_state.get_selected_entry()
-            actions.close(prompt_bufnr)
-            if selection ~= nil then
-              vim.cmd('tabnew ' .. selection.path)  -- Open in a new tab
-            end
-          end)
-
-          return true
-        end
-      })
-    end, { desc = "Find files" })
-
-    --vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files"})
 
     vim.keymap.set('n', '<leader>pf', function()
       builtin.grep_string({
@@ -40,22 +40,6 @@ return {
         additional_args = function()
           return { "--smart-case" }
         end,
-        attach_mappings = function(prompt_bufnr, map)
-          local action_state = require('telescope.actions.state')
-          local actions = require('telescope.actions')
-
-          map('i', '<CR>', function()
-            local selection = action_state.get_selected_entry()
-            actions.close(prompt_bufnr)
-            if selection ~= nil then
-              vim.cmd('tabnew ' .. selection.path)  -- Open in a new tab
-              vim.cmd(':' .. selection.lnum)
-              vim.cmd('norm zz')
-            end
-          end)
-
-          return true
-        end
       })
     end, { desc = "Project find" })
 
@@ -67,22 +51,6 @@ return {
         cwd = buf_dir,
         additional_args = function()
           return { "--smart-case" }
-        end,
-        attach_mappings = function(prompt_bufnr, map)
-          local action_state = require('telescope.actions.state')
-          local actions = require('telescope.actions')
-
-          map('i', '<CR>', function()
-            local selection = action_state.get_selected_entry()
-            actions.close(prompt_bufnr)
-            if selection ~= nil then
-              vim.cmd('tabnew ' .. selection.path)
-              vim.cmd(':' .. selection.lnum)
-              vim.cmd('norm zz')
-            end
-          end)
-
-          return true
         end,
       })
     end, { desc = "Find in current dir" })
