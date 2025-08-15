@@ -70,6 +70,7 @@ local function code_actions(client, bufnr)
     end
   end
 
+  print("fallback code actions for client " .. client.name)
   -- fallback
   vim.lsp.buf.code_action()
 end
@@ -83,6 +84,35 @@ M.create = function()
 
       vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', { buffer = bufnr, desc = "Hover" })
       vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = bufnr, desc = "To definition" })
+      vim.keymap.set('n', '<leader>gd', function()
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        if #clients == 0 then
+          vim.notify('No LSP client attached', vim.log.levels.WARN)
+          return
+        end
+
+        local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+
+        vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, _, _)
+          if err then
+            vim.notify('Error while finding definition: ' .. err.message, vim.log.levels.ERROR)
+            return
+          end
+          if not result or (vim.islist(result) and #result == 0) then
+            vim.notify('No definition found', vim.log.levels.INFO)
+            return
+          end
+
+          vim.cmd('tab split')
+
+          local location = vim.islist(result) and result[1] or result
+
+          vim.lsp.util.show_document({
+            uri = location.uri or location.targetUri,
+            range = location.range or location.targetSelectionRange,
+          }, client.offset_encoding)
+        end)
+      end, { buffer = bufnr, desc = "To definition in new tab" })
       vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { buffer = bufnr, desc = "To declaration" })
       vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { buffer = bufnr, desc = "To implementation" })
       vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', { buffer = bufnr, desc = "To type" })
