@@ -20,9 +20,15 @@ return {
             actions.close(prompt_bufnr)
             if sel ~= nil then
               vim.cmd("tabnew " .. sel.path)
+
+              local lnum = sel.lnum or sel.row
+              local col  = sel.col or 1
+              if lnum then
+                vim.api.nvim_win_set_cursor(0, { lnum, math.max(col - 1, 0) })
+              end
             end
           end,
-        },
+        }
       }
     }
   },
