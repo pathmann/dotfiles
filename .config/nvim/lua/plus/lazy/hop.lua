@@ -9,10 +9,10 @@ return {
 
     local directions = require('hop.hint').HintDirection
     vim.keymap.set('n', 'f', function()
-      hop.hint_char1({ direction = directions.AFTER_CURSOR})
+      hop.hint_char2({ direction = directions.AFTER_CURSOR})
     end, {remap=true})
     vim.keymap.set('n', 'F', function()
-      hop.hint_char1({ direction = directions.BEFORE_CURSOR})
+      hop.hint_char2({ direction = directions.BEFORE_CURSOR})
     end, {remap=true})
   end,
 }
