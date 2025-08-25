@@ -28,58 +28,7 @@ local function not_in_comment_or_string()
   return not recurse(root)
 end
 
-return {
-  s("class", fmt([[
-class {} {{
-  public:
-    {}();
-    ~{}();
-
-  private:
-    {}
-}};
-  ]], {
-    i(1, "ClassName"),
-    rep(1),
-    rep(1),
-    i(2, ""),
-  })),
-
-  s("struct", fmt([[
-struct {} {{
-    {}
-}};
-]], {
-  i(1, "StructName"),
-  i(2, ""),
-  })),
-
-  s("qclass", fmt([[
-class {} {{
-  Q_OBJECT
-
-  public:
-    explicit {}(QObject* parent = nullptr);
-    ~{}();
-
-  signals:
-
-  public slots:
-
-  protected slots:
-
-  private:
-    {}
-}};
-  ]], {
-    i(1, "ClassName"),
-    rep(1),
-    rep(1),
-    i(2, ""),
-  })),
-
-},
-{
+local unused_autosnippets = {
   --the closing bracket will be automatically added by nvim-autopairs!
   s("if (", fmt("if ({} {{\n  {}\n}}", {
     i(1, "condition"),
@@ -144,3 +93,54 @@ catch (const std::exception& e) {{
     i(2, ""),
   })),
 }
+return {
+  s("class", fmt([[
+class {} {{
+  public:
+    {}();
+    ~{}();
+
+  private:
+    {}
+}};
+  ]], {
+    i(1, "ClassName"),
+    rep(1),
+    rep(1),
+    i(2, ""),
+  })),
+
+  s("struct", fmt([[
+struct {} {{
+    {}
+}};
+]], {
+  i(1, "StructName"),
+  i(2, ""),
+  })),
+
+  s("qclass", fmt([[
+class {} {{
+  Q_OBJECT
+
+  public:
+    explicit {}(QObject* parent = nullptr);
+    ~{}();
+
+  signals:
+
+  public slots:
+
+  protected slots:
+
+  private:
+    {}
+}};
+  ]], {
+    i(1, "ClassName"),
+    rep(1),
+    rep(1),
+    i(2, ""),
+  })),
+
+}, {}
