@@ -10,6 +10,7 @@ bindkey "^[e"   expand-cmd-path         # C-e for expanding path of typed comman
 bindkey "^[[A"  up-line-or-search       # Up arrow for back-history-search.
 bindkey "^[[B"  down-line-or-search     # Down arrow for fwd-history-search.
 bindkey " "     magic-space             # Do history expansion on space.
+bindkey '^O' push-line-or-edit
 case "$TERM" in
         xterm) #guake is returning xterm
                 bindkey "^[OH" beginning-of-line
