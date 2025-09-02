@@ -9,7 +9,21 @@ return {
         null_ls.builtins.diagnostics.clazy.with({
           filetypes = { "cpp" }
         }),
+        null_ls.builtins.hover.printenv,
       },
     })
+
+    -- dummy to activate it on qmake files (to get cmp)
+    local qmake = {
+      method = null_ls.methods.DIAGNOSTICS,
+      filetypes = { "qmake" },
+      generator = {
+        fn = function()
+          return {}
+        end,
+      },
+    }
+
+    null_ls.register(qmake)
   end,
 }
