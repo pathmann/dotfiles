@@ -1,6 +1,26 @@
 local action_state = require('telescope.actions.state')
 local actions = require('telescope.actions')
 
+local open_externally = function(prompt_bufnr)
+  local entry = action_state.get_selected_entry()
+  actions.close(prompt_bufnr)
+
+  if entry and entry.path then
+    local path = entry.path
+    local cmd
+    if vim.fn.has("macunix") == 1 then
+      cmd = { "open", path }
+    elseif vim.fn.has("unix") == 1 then
+      cmd = { "xdg-open", path }
+    elseif vim.fn.has("win32") == 1 then
+      cmd = { "start", path }
+    end
+    if cmd then
+      vim.fn.jobstart(cmd, { detach = true })
+    end
+  end
+end
+
 return {
   'nvim-telescope/telescope.nvim',
 
@@ -28,6 +48,10 @@ return {
               end
             end
           end,
+          ["x"] = open_externally,
+        },
+        i = {
+          ["<C-x>"] = open_externally,
         }
       }
     }
