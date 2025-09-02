@@ -9,7 +9,9 @@ return {
         null_ls.builtins.diagnostics.clazy.with({
           filetypes = { "cpp" }
         }),
-        null_ls.builtins.hover.printenv,
+        null_ls.builtins.hover.printenv.with({
+          filetypes = { "sh", "dosbatch", "ps1", "qmake" }
+        }),
       },
     })
 
