@@ -15,6 +15,14 @@ return {
       per.select()
     end, { desc = "Select session" })
     vim.keymap.set("n", "<leader>qs", function()
+      -- can't use PeristenceSavePre for this because calling save() won't fire the event
+      for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        local ok, val = pcall(vim.api.nvim_buf_get_var, bufnr, "nvim-dap-project-configuration")
+        if ok and val then
+          vim.api.nvim_buf_delete(bufnr, { force = true })
+        end
+      end
+
       per.save()
     end, { desc = "Store session" })
 
@@ -43,5 +51,5 @@ return {
       end
     end,
   })
-  end,
+end,
 }
