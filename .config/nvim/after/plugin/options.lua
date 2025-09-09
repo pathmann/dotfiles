@@ -18,6 +18,8 @@ vim.opt.cursorlineopt = "number"
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.scrolloff = 5
+
 vim.g.netrw_sort_options = "i"
 vim.g.netrw_sort_sequence = "[/]$"
 vim.g.netrw_bufsettings = 'noma nomod nu nornu nobl nowrap ro'
