@@ -160,5 +160,10 @@ return {
         vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = "#FFFFFF", bg = "#00BFFF", underline = true })  -- White text on deep sky blue
         vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = "#FFFFFF", bg = "#FF4500", bold = true })  -- White text on strong orange-red
 
+        vim.filetype.add({
+          pattern = {
+            ['%.gitlab%-ci%.ya?ml'] = 'yaml.gitlab',
+          },
+        })
     end
 }
