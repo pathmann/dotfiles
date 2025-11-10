@@ -1,35 +1,58 @@
-version = "1.1.15"
+version = "1.1.16"
 
-[icons]
-DEFAULT = ""
-"(?i)chromium" = ""
-"geany" = ""
-"(?i)alacritty" = ""
+[class]
+rust = ""
+github = ""
 "(?i)qtcreator" = ""
-"code" = ""
-"(?i)texworks" = "✏️"
-"(?i)thunderbird" = ""
-"github" = ""
-"rust" = ""
-"google" = ""
-"private browsing" = ""
-"firefox" = ""
-"chrome" = ""
-"(?i)nautilus" = ""
-"libreoffice calc" = ""
 "libreoffice writer" = ""
-"libreoffice" = ""
-"nvim" = ""
-"gthumb" = ""
-"menu" = ""
-"calculator" = ""
-"transmission" = ""
-"videostream" = ""
-"mpv" = ""
-"music" = "🎶"
-"disk usage" = ""
+nvim = ""
+menu = ""
+calculator = ""
+music = "🎶"
 "(?i)steam" = ""
+videostream = ""
+"libreoffice calc" = ""
+gthumb = ""
+libreoffice = ""
+google = ""
+"disk usage" = ""
+code = ""
+firefox = ""
+chrome = ""
+"(?i)nautilus" = ""
+transmission = ""
+"(?i)chromium" = ""
+mpv = ""
+geany = ""
+"(?i)texworks" = "✏️"
+"(?i)alacritty" = ""
+DEFAULT = ""
+"(?i)thunderbird" = ""
+"private browsing" = ""
 
+[class_active]
+
+[initial_class]
+
+[initial_class_active]
+
+[workspaces_name]
+
+[title_in_class]
+
+[title_in_class_active]
+
+[title_in_initial_class]
+
+[title_in_initial_class_active]
+
+[initial_title_in_class]
+
+[initial_title_in_class_active]
+
+[initial_title_in_initial_class]
+
+[initial_title_in_initial_class_active]
 
 [exclude]
 "(?i)fcitx" = ".*"
