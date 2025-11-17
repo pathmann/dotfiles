@@ -33,7 +33,7 @@ get_display_command() {
 
 if [ $# -gt 3 ]; then
     if [ "$1" -eq "1" ]; then
-        printf "#[fg=yellow]"
+        printf "#[fg=colour254, bold]"
     fi
 
     printf "(#I) "
