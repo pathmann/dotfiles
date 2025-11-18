@@ -32,7 +32,9 @@ vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 
-vim.g.clipboard = 'osc52'
+if os.getenv("SSH_CONNECTION") ~= nil then
+  vim.g.clipboard = 'osc52'
+end
 
 --don't know why, but necessary to be able to use folding without manually setting foldmethod=expr again
 vim.api.nvim_create_autocmd("BufWinEnter", {
