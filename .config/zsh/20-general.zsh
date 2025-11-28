@@ -1,4 +1,9 @@
-export PROJECT_DIR=/media/PROJECTS/Active/
+HOSTNAME=${hostname}
+if [[ "$HOSTNAME" == "heisenberg" ]]; then
+  export PROJECT_DIR=/media/PROJECTS/Active/
+else
+  export PROJECT_DIR=$HOME/Projects/
+fi
 setopt autocd
 
 if [ -f /usr/bin/nvim ]; then
