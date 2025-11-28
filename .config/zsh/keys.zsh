@@ -11,6 +11,17 @@ bindkey "^[[A"  up-line-or-search       # Up arrow for back-history-search.
 bindkey "^[[B"  down-line-or-search     # Down arrow for fwd-history-search.
 bindkey " "     magic-space             # Do history expansion on space.
 bindkey '^O' push-line-or-edit
+
+# in case we don't use vi-mode, we could use these:
+# # delete word behind cursor
+# bindkey '^[b' backward-kill-word
+# # move cursor one word left
+# bindkey '^[B' backward-word
+# # delete word in front of cursor
+# bindkey '^[w' kill-word
+# # move cursor one word right
+# bindkey '^[W' forward-word
+
 case "$TERM" in
         xterm) #guake is returning xterm
                 bindkey "^[OH" beginning-of-line
