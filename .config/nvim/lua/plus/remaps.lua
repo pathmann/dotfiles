@@ -142,3 +142,5 @@ vim.keymap.set({'n', 'x'}, '<leader>d', function()
     vim.o.clipboard = old
   end)
 end, { noremap = true, silent = true })
+
+vim.keymap.set('n', 'U', '<C-r>', { noremap = true, silent = true , desc = "Redo" })
