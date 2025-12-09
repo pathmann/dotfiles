@@ -9,7 +9,17 @@ return {
     {
       "<leader>xx",
       "<cmd>Trouble diagnostics toggle<cr>",
-      desc = "Diagnostics (Trouble)",
+      desc = "Diagnostics",
+    },
+    {
+      "<leader>xX",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Diagnostics current buf",
+    },
+    {
+      "<leader>xq",
+      "<cmd>Trouble qflist toggle<cr>",
+      desc = "Quickfix list",
     },
   }
 }
