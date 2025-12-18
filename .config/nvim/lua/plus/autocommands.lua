@@ -90,3 +90,17 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = args.buf, desc = "Open selected quickfix items in new tabs" })
   end,
 })
+
+vim.api.nvim_create_autocmd({'VimEnter' }, {
+  callback = function()
+    local path = vim.fn.getcwd() .. "/.nvim_startup.lua"
+    if vim.fn.filereadable(path) == 1 then
+      local startfn = loadfile(path)
+      if type(startfn) == "function" then
+        startfn()
+      else
+        vim.notify("invalid startup file in cwd")
+      end
+    end
+  end
+})
