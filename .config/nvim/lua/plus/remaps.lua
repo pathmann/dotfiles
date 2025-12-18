@@ -5,13 +5,16 @@ vim.keymap.set("n", "<leader>pv", function()
     vim.cmd("silent! bwipeout") -- Close the oil buffer
   end
   local bufname = vim.api.nvim_buf_get_name(0)
-  if bufname:startswith("suda://") then
+  if bufname:startswith("distant://") then
+    local distantacts = require("distant.nav.actions")
+    distantacts.up({ reload = true })
+  elseif bufname:startswith("suda://") then
     local fname = bufname:sub(8)
     vim.cmd.Ex(vim.fn.fnamemodify(fname, ":h"))
   else
     vim.cmd("Ex")
   end
-end, { desc = "To netrw" })
+end, { desc = "Parent dir" })
 
 vim.keymap.set("n", "<C-t>", function()
   local cddir = vim.fn.getcwd()
