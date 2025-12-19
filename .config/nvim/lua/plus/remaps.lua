@@ -73,6 +73,20 @@ vim.keymap.set("n", '<C-h>', go_left_or_tab)
 vim.keymap.set("n", '<C-l>', go_right_or_tab)
 
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = "distant-dir",
+  callback = function()
+    vim.keymap.set("n", "<BS>", function()
+      local bufname = vim.api.nvim_buf_get_name(0)
+      local path = bufname:match(":///(.+)")
+      path = path:gsub("/+$", "")
+      local parent = vim.fn.fnamemodify(path, ":h")
+      parent = parent:gsub("/", "\\")
+      require("distant").editor.open({path = parent})
+    end, { remap = true, buffer = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
   pattern = "netrw",
   callback = function()
     vim.keymap.set("n", '<C-l>', go_right_or_tab, { remap = true, buffer = true })
