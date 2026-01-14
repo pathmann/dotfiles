@@ -28,7 +28,12 @@ pkill --signal TERM chromium
 
 case $action in
   "logout")
-    killall -9 Hyprland || killall -9 sway 
+    # killall -9 Hyprland || killall -9 sway 
+    if pgrep -x Hyprland > /dev/null; then
+      hyprctl dispatch exit || pkill -x Hyprland
+    elif pgrep -x sway > /dev/null; then
+      swaymsg exit || pkill -x sway
+    fi
     ;;
   "reboot")
     systemctl reboot
